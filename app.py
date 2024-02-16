@@ -27,15 +27,28 @@ def database():
 
     return rows
 
+def contactList():
+    # Create a cursor object
+    cur = mysql.connection.cursor()
+
+    htmlCode = ""
+
+    cur.execute("SELECT studentMail, campusName FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus")
+    for rows in cur.fetchall():
+        htmlCode += "<tr><td>" + str(rows[0]) + ' </td><td>' + str(rows[1]) + '</td></tr>'
+
+    cur.close()
+    
+    return htmlCode
+
 
 @app.route('/')
 def hello():
     return render_template('index.html')
 
-
 @app.route("/list")
 def list():
-    return render_template("list.html", list=database())
+    return render_template("list.html", list = contactList())
 
 @app.route("/add")
 def add(): 

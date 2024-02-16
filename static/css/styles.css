@@ -1,9 +1,21 @@
 body {
     margin: 0;
     font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
+    width: calc(100% - 20px);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(50px);
+    position: sticky;
+    top: 0;
+    z-index: 2000;
     text-align: center;
     padding: 20px 10px;
     border-bottom: 1px #333 solid;
@@ -47,14 +59,18 @@ nav a.active {
 }
 
 .content {
-    padding: 20px;
+    position: relative;
+    padding: 0;
+    display: block;
+    height: inherit;
+    overflow-y: hidden;
 }
 
 .vertical{
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .horizontal{
@@ -62,16 +78,17 @@ nav a.active {
     display: flex;
     flex-direction: row;
     align-items: start;
-    justify-content: space-evenly;
+    justify-content: space-between;
     overflow: hidden;
+    height: inherit;
 }
 
 .map{
-    height: 100%;
+    height: calc(100vh);
 }
 
 .mapAera{
-    width: 50%;
+    width: 500px;
     overflow: hidden;
     display: flex;
 }
@@ -80,4 +97,39 @@ nav a.active {
     font-size: 2em;
     font-weight: 800;
     text-align: left;
+}
+
+.alwaysOnTop{
+    position: absolute;
+    z-index: 1000;
+    right: 0;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(50px);
+    border-left: 1px solid gray;
+    height: 100%;
+    padding: 20px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr{
+    border-bottom: solid 4px white;
+    background-color: transparent;
+    background-color: rgba(156, 156, 156, 0.199);
+    height: 1.5em;
+}
+
+td{
+    padding: 5px 10px;
+}
+
+th{
+    background-color: orange;
+    color: white;
+    text-align: left;
+    padding: 5px 10px;
 }

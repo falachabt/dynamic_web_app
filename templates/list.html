@@ -2,7 +2,15 @@
 {% block title %} list {% endblock %}
 
 {% block content %}
-
-<h1> Discover icam's campus diversity  </h1>
-   {{list}}
+<div class='vertical' style='padding: 40px;'>
+   <h1>Candidadures déposées</h1>
+   <h2>Contactez support@icam.fr si votre nom n'apparait pas.</h2>
+   <table>
+      <tr>
+         <th>Email</th>
+         <th>Preferred destination</th>
+      </tr>
+      {{list |safe}}
+   </table>
+</div>
 {% endblock %}
