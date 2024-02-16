@@ -16,6 +16,7 @@
          
 
         <nav>
+            <a href="{{ url_for('hello') }}" class="{% if active_page == 'hello' %}active{% endif %}">Accueil</a>
             <a href="{{ url_for('list') }}" class="{% if active_page == 'list' %}active{% endif %}">List</a>
             <a href="{{ url_for('add') }}" class="special ">Register your site</a>
         </nav>
