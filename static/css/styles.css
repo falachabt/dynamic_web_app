@@ -63,7 +63,6 @@ nav a {
     font-size: 1.1em;
     padding: 10px 20px;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
 a.special {
