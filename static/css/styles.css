@@ -1,6 +1,11 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url(/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat';
 }
 
 header {
@@ -46,3 +51,9 @@ nav a.active {
     padding: 20px;
 }
 
+div.horizontal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
