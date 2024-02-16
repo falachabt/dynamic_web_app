@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 20px 10px;
+    border-bottom: 1px #333 solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    height: 50px;
+    width: 120px;
+}
+
+nav a {
+    color: #333;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a.special {
+    background-color: rgba(244, 160, 3, 0.5);
+    border-radius: 5px;
+    color: black !important;
+}
+
+a.special:hover {
+    background-color: rgba(244, 160, 3, 0.9);
+}
+
+nav a:hover {
+    color: indigo;
+}
+
+nav a.active {
+    color: indigo ; 
+}
+
+.content {
+    padding: 20px;
+}
+
