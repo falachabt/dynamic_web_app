@@ -1,11 +1,6 @@
-@font-face {
-    font-family: 'Montserrat';
-    src: url(/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf) format('truetype');
-}
-
 body {
     margin: 0;
-    font-family: 'Montserrat';
+    font-family: sans-serif;
 }
 
 header {
@@ -19,6 +14,8 @@ header {
 
 header .logo {
     height: 50px;
+    margin: 0;
+    align-self: center;
 }
 
 nav a {
@@ -30,13 +27,15 @@ nav a {
 }
 
 a.special {
-    background-color: rgba(244, 160, 3, 0.5);
+    background-color: rgba(255, 166, 0, 0.604);
     border-radius: 5px;
     color: black !important;
+    transition: .1s;
 }
 
 a.special:hover {
-    background-color: rgba(244, 160, 3, 0.9);
+    background-color: rgb(255, 181, 45);
+    scale: 0.8;
 }
 
 nav a:hover {
@@ -51,9 +50,34 @@ nav a.active {
     padding: 20px;
 }
 
-div.horizontal{
+.vertical{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+}
+
+.horizontal{
+    max-width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     justify-content: space-evenly;
+    overflow: hidden;
+}
+
+.map{
+    height: 100%;
+}
+
+.mapAera{
+    width: 50%;
+    overflow: hidden;
+    display: flex;
+}
+
+.mainTitle{
+    font-size: 2em;
+    font-weight: 800;
+    text-align: left;
 }
