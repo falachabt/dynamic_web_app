@@ -25,22 +25,7 @@ def database():
     # Close the cursor
     cur.close()
 
-    # Generate HTML code to display the data in a table
-    htmlCode = "<table border='1'>"
-    htmlCode += "<tr>"
-    htmlCode += "<th>Student Mail</th>"
-    htmlCode += "<th>Campus Name</th>"
-    htmlCode += "</tr>"
-
-    for row in rows:
-        htmlCode += "<tr>"
-        htmlCode += "<td>" + str(row[0]) + "</td>"
-        htmlCode += "<td>" + str(row[1]) + "</td>"
-        htmlCode += "</tr>"
-
-    htmlCode += "</table>"
-
-    return htmlCode
+    return rows
 
 
 @app.route('/')
