@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-{% block title %} list {% endblock %}
+{% block title %} Campus {% endblock %}
 
 {% block content %}
 
 <h1> Discover icam's campus diversity  </h1>
-   {{list}}
+   {%for site in list %}
+      {{ site[0] }}
+   {% endfor %}
 {% endblock %}

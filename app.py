@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -10,7 +10,6 @@ app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'PBLMIA11'
 mysql = MySQL(app)
  
-#this function is called to generate the home page of your website
 
 def database():
     # Create a cursor object
@@ -32,6 +31,10 @@ def database():
 def hello():
     return render_template('index.html')
 
+
+@app.route('/login')
+def login(): 
+    return render_template('login.html')
 
 @app.route("/list")
 def list():
