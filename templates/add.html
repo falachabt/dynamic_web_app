@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
-
 {% block content %}
-   register to a campus for mobility
+<h2>Register to a Campus for Mobility</h2>
+
+<div class="register-to-campus">
+   <form action="" method="post">
+      <div class="form-group">
+         <label for="email">Email</label>
+         <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+         <label for="campus">Campus</label>
+         <select id="campus" name="campus" required>
+            {% for campus in all_campus %}
+               <option value="{{ campus[0] }}">{{ campus[1] }}</option>
+            {% endfor %}
+         </select>
+      </div>
+      <button type="submit">Submit</button>
+   </form>
+</div>
 {% endblock %}
