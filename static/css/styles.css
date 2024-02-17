@@ -63,6 +63,8 @@ nav a {
     font-size: 1.1em;
     padding: 10px 20px;
     text-decoration: none;
+    border: solid 1px transparent;
+    border-radius: 5px;
 }
 
 a.special {
@@ -78,6 +80,7 @@ a.special:hover {
 
 nav a:hover {
     color: indigo;
+    border: solid 1px gray;
 }
 
 nav a.active {
