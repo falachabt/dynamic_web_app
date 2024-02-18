@@ -77,11 +77,11 @@ def addCampus():
     val = (request.values['campusIndex'], request.values['campusName'])
     cur.execute(sql,val)
     mysql.connection.commit()
-    return render_template("redirect.html", path = '<meta http-equiv="refresh" content="0; url=http://127.0.0.1:5000/admin" />')
+    return render_template("admin.html", campusList = campusList('*'))
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    return render_template('index.html', list = campusList('campusName'))
 
 @app.route('/choices')
 def choices():
