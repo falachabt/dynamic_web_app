@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask import request
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -47,7 +48,7 @@ def campusList(arg):
 
     htmlCode = ""
 
-    cur.execute("SELECT " + arg + " FROM Campus ")
+    cur.execute("SELECT " + arg + " FROM Campus ORDER BY idCampus")
     for rows in cur.fetchall():
         htmlCode += "<tr>"
         for col in rows:
@@ -57,6 +58,15 @@ def campusList(arg):
     cur.close()
     
     return htmlCode
+
+@app.route('/addCampus', methods =['GET'])
+def addCampus():
+    cur = mysql.connection.cursor()
+    sql = "INSERT INTO Campus(idCampus, campusName) VALUES (%s, %s)"
+    val = (request.values['campusIndex'], request.values['campusName'])
+    cur.execute(sql,val)
+    mysql.connection.commit()
+    return render_template("admin.html", campusList = campusList('*'))
 
 @app.route('/')
 def hello():
@@ -70,9 +80,9 @@ def list():
 def admin():
     return render_template("admin.html", campusList = campusList('*'))
 
-@app.route("/add")
-def add(): 
-    return render_template("add.html")
+@app.route("/apply")
+def apply(): 
+    return render_template("apply.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

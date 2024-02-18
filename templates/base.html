@@ -7,7 +7,7 @@
     <title>{% block title %} {% endblock %} - Mobility</title>
     <!-- Link to external CSS file -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel='icon' href="{{ url_for('static', filename='images/logo-short.png') }}">
+    <link rel='icon' href="{{ url_for('static', filename='images/logotype_short.png') }}">
 </head>
 
 <body>
@@ -17,10 +17,10 @@
          
 
         <nav>
-            <a href="{{ url_for('hello') }}" class="{% if active_page == 'hello' %}active{% endif %}">Home</a>
-            <a href="{{ url_for('list') }}" class="{% if active_page == 'list' %}active{% endif %}">Applications</a>
-            <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %}">Admin Portal</a>
-            <a href="{{ url_for('add') }}" class="special ">Apply</a>
+            <a href="{{ url_for('hello') }}" class="{% if active_page == 'hello' %}active{% endif %} outlined">Home</a>
+            <a href="{{ url_for('list') }}" class="{% if active_page == 'list' %}active{% endif %} outlined">Applications</a>
+            <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} outlined">Admin Portal</a>
+            <a href="{{ url_for('apply') }}" class="special">Apply</a>
         </nav>
     </header>
     
