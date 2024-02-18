@@ -86,4 +86,12 @@ nav a.active {
  button[type="submit"]:hover {
     background-color: #0056b3;
  }
+
+
+ .error_message {
+    padding: 10px 20px;
+    margin: 10px 20px;
+    width: 100%;
+    background-color: rgba(210, 11, 11, 0.594);
+ }
  

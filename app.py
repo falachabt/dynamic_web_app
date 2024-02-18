@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
+from utils.auth import Usersignup, Userlogin, check_user_exists
 
 
 app = Flask(__name__)
+app.secret_key = '12345678'
 
 
 app.config['MYSQL_HOST'] = '127.0.0.1'
@@ -70,7 +72,13 @@ def choices():
 
 @app.route('/login')
 def login(): 
-    return render_template('login.html')
+    error = request.args.get('error')
+    return render_template('login.html', error = error)
+
+@app.route('/signup')
+def signup(): 
+    error = request.args.get('error')
+    return render_template('signup.html', error = error)
 
 @app.route("/list")
 def list():
@@ -79,6 +87,49 @@ def list():
 @app.route("/add")
 def add(): 
     return render_template("add.html")
+
+
+
+
+'''
+API ROUTES
+'''
+@app.route('/api/signup', methods=['POST'])
+def signup_api():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        [ exist, message ] = check_user_exists(mysql, email); 
+        print(exist)
+        print(message)
+        if not exist:
+            [ success, er_message ] =  Usersignup(mysql, email, password)
+            print(success)
+            print(er_message)
+            return redirect(url_for("login"))
+        else:
+            return  redirect(url_for("signup", error = "User already exists" ))
+    else:
+        return redirect(url_for("signup", error = "Invalid request method" ))
+
+@app.route('/api/login', methods=['POST'])
+def login_api():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        [user, errormessage ] = Userlogin(mysql, email, password)
+        # print(user)
+        print(" errorMessage :  ", errormessage)
+        if user != None:
+            session['user'] = user  
+            return redirect(url_for("list"))
+        else:
+            return redirect(url_for("login", error = "Invalid email or password"))
+    else:
+        return redirect(url_for("login", error = "Invalid request method"))
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

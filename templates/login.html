@@ -2,9 +2,15 @@
 content %}
 
 <div class="login">
+  <div>
+
+  </div>
   <div class="login-container">
+    {% if error %}
+    <span class="error_message" > {{ error }} </span>
+    {% endif %}
     <h2>Login</h2>
-    <form action="" method="post">
+    <form action="/api/login" method="post">
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -29,6 +35,12 @@ content %}
         <button type="submit">Login</button>
       </div>
     </form>
+    <div style="text-align: center">
+      <hr />
+      or don't have an account ?
+      <hr />
+      <a href="{{url_for('signup')}}"> Signup </a>
+    </div>
   </div>
 </div>
 
