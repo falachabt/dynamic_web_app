@@ -81,7 +81,7 @@ def addCampus():
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    return render_template('index.html', list = campusList('campusName'))
 
 @app.route('/choices')
 def choices():
