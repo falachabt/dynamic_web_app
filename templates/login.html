@@ -1,24 +1,47 @@
+{% extends 'base.html' %} {% block title %} Login {% endblock %} {% block
+content %}
 
-{% extends 'base.html' %}
-{% block title %} Admin login {% endblock %}
+<div class="login">
+  <div>
 
-{% block content %}
+  </div>
+  <div class="login-container">
+    {% if error %}
+    <span class="error_message" > {{ error }} </span>
+    {% endif %}
+    <h2>Login</h2>
+    <form action="/api/login" method="post">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+        />
+      </div>
 
-<div style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 300px); width: 100%;" >
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+        />
+      </div>
 
-    <form action="/adminLogin" method="post">
-        <h3> Admin login </h3>
-        <div class="horizontal">
-            <label for="admin_email"> email </label>
-            <input type="email" name="" id="admin_email">
-        </div>
-        <div class="horizontal">
-            <label for="admin_password"> password </label>
-            <input type="password" name="" id="admin_password">
-        </div>
-        <div class="horizontal">
-            <button type="submit"> Login </button>
-        </div>
+      <div class="form-group">
+        <button type="submit">Login</button>
+      </div>
     </form>
+    <div style="text-align: center">
+      <hr />
+      or don't have an account ?
+      <hr />
+      <a href="{{url_for('signup')}}"> Signup </a>
+    </div>
+  </div>
 </div>
+
 {% endblock %}

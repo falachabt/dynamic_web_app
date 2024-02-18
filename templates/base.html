@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} {% endblock %} - Mobility</title>
     <!-- Link to external CSS file -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -13,20 +12,33 @@
 <body>
     <header class='blur'>
         
-                <img src="{{ url_for('static', filename='images/logotype-seul-couleur-RVB.png') }}" class="logo" alt="icam logo" srcset="">
+      <img src="{{ url_for('static', filename='images/logotype-seul-couleur-RVB.png') }}" class="logo" alt="icam logo" srcset="">
          
 
-        <nav>
-            <a href="{{ url_for('hello') }}" class="{% if active_page == 'hello' %}active{% endif %} outlined">Home</a>
-            <a href="{{ url_for('list') }}" class="{% if active_page == 'list' %}active{% endif %} outlined">Applications</a>
-            <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} outlined">Admin Portal</a>
-            <a href="{{ url_for('apply') }}" class="special">Apply</a>
-        </nav>
-    </header>
-    
-    <div class="content">
-        {% block content %} {% endblock %}
-    </div>
-</body>
+      <nav>
+          <a href="{{ url_for('list') }}" class="{% if active_page == 'list' %}active{% endif %}">List</a>
+          <a href="{{ url_for('add') }}" class="special ">Register your site</a>
+          {% if session.get("user") %}
+          <a
+          href="{{ url_for('list') }}"
+          class="{% if active_page == 'list' %}active{% endif %}"
+          >List</a
+          >
+          <a href="{{ url_for('add') }}" class="">Register your site</a>
+          <a href="{{ url_for('choices') }}" class="">Choices</a>
+          {% endif %}
 
+          {% if session.get("user") %}
+          <a href="{{ url_for('logout') }}" class="special">Logout</a>
+          {% endif %}
+          {% if not session.get("user") %}
+          <a href="{{ url_for('login') }}" class="special">Login</a>
+          {% endif %}
+          <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} outlined">Admin Portal</a>
+          <a href="{{ url_for('apply') }}" class="special">Apply</a>
+      </nav>
+    </header>
+
+    <div class="content">{% block content %} {% endblock %}</div>
+  </body>
 </html>

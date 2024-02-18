@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block title %} Students choices {% endblock %} {%
+block content %}
+
+<div class="choices_header">
+  <h2>Students choices</h2>
+  <span>{{search}}</span>
+  <div class="search_container">
+    <div>
+      <label for="search">Search a student or a campus wish</label>
+      <input type="text" id="search" placeholder="Type the tag"  defaultValue="{{search}}"   />
+    </div>
+    <button type="submit" id="search_button">search</button>
+  </div>
+</div>
+
+<table class="choices-table">
+  <thead>
+    <tr>
+      <th>Student email</th>
+      <th>Campus wish</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for choice in choices %}
+    <tr>
+      <td>{{ choice[0] }}</td>
+      <td>{{ choice[1] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var searchButton = document.getElementById("search_button");
+
+    searchButton.addEventListener("click", function () {
+      var searchInput = document.getElementById("search").value.trim();
+      window.location.href =
+        "/choices?search=" + encodeURIComponent(searchInput);
+    });
+  });
+</script>
+{% endblock %}

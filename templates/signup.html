@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block title %} Login {% endblock %} {% block
+    content %}
+    
+    <div class="login">
+      <div class="login-container">
+        <h2>Signup</h2>
+        {{ error }}
+        <form action="/api/signup" method="post">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+            />
+          </div>
+    
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+            />
+          </div>
+    
+          <div class="form-group">
+            <button type="submit"> Signup </button>
+          </div>
+        </form>
+        <div style="text-align: center;">
+          <hr>
+          have an account ?
+          <hr>
+          <a href="{{url_for('login')}}"> Login </a>
+        </div>
+      </div>
+    </div>
+    
+    {% endblock %}
+    
