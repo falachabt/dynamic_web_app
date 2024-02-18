@@ -68,7 +68,6 @@ def campusList(arg):
         return htmlCode
     except Exception as e:
         error_message = str(e)
-        print(error_message)
         return  error_message
 
 @app.route('/addCampus', methods =['POST'])
@@ -170,12 +169,14 @@ def signup_api():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
+        secret = request.form.get("secret")
         [ exist, message ] = check_user_exists(mysql, email); 
-        print(exist)
-        print(message)
+
         if not exist:
-            [ success, er_message ] =  Usersignup(mysql, email, password)
-            print(success)
+            [ success, er_message ] =  Usersignup(mysql, email, password, secret)
+            if success is False:
+                return redirect(url_for("signup"), error = "wrong secret" ) 
+            
             print(er_message)
             return redirect(url_for("login"))
         else:

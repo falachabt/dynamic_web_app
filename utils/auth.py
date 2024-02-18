@@ -1,7 +1,7 @@
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 
-def Usersignup(mysql, email, password):
+def Usersignup(mysql, email, password, secret):
     try:
         cur = mysql.connection.cursor()
         # Check if users table exists
@@ -19,7 +19,11 @@ def Usersignup(mysql, email, password):
             
         # issue with password hash
         # hashed_password = generate_password_hash(password)
-        cur.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
+        role = getRole(secret)
+        if role is None:
+            raise ValueError("Wrong secret")
+            
+        cur.execute("INSERT INTO users (email, password, role) VALUES (%s, %s)", (email, password, role))
         mysql.connection.commit()
         cur.close()
         return True, None
@@ -53,3 +57,13 @@ def check_user_exists(mysql: MySQL, email: str):
     except Exception as e:
         error_message = str(e)
         return False, error_message
+    
+    
+def getRole(secret):
+    match secret:
+        case "board":
+            return "admin"
+        case "2027":
+            return "student"
+        case "other":
+            return None
