@@ -3,5 +3,23 @@
 {% block title %} Apply {% endblock %}
 
 {% block content %}
-   register to a campus for mobility
+   <div class="applyNav">
+      <a href="/apply/resume">Resume</a>
+      <a href="/apply/letter">Cover letter</a>
+      <a href="/apply/destination">Destination</a>
+   </div>
+   
+   <form>
+      <div class="horizontal">
+         {{ resume | safe}}
+      </div>
+      <div class="horizontal">
+         {{ coverLetter | safe}}
+      </div>
+      <div class="horizontal">
+         {{ destination | safe}}
+      </div>
+   </form>
+
+  
 {% endblock %}

@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+{% block title %} Admin login {% endblock %}
+
+{% block content %}
+
+<form action="/adminLogin" method="post">
+    <h3> Admin login </h3>
+    <div class="horizontal">
+        <label for="admin_email"> email </label>
+        <input type="email" name="" id="admin_email">
+    </div>
+    <div class="horizontal">
+        <label for="admin_password"> password </label>
+        <input type="password" name="" id="admin_password">
+    </div>
+    <div class="horizontal">
+        <button type="submit"> Login </button>
+    </div>
+</form>
+{% endblock %}

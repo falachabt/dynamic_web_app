@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect, url_for
 from flask import request
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.secret_key = "123456789"
 
 
 app.config['MYSQL_HOST'] = 'localhost'
@@ -78,11 +79,25 @@ def list():
 
 @app.route("/admin")
 def admin():
-    return render_template("admin.html", campusList = campusList('*'))
+    userType = session.get("userType")
+    if(userType != "admin"):
+        return render_template("login.html")
+    else:
+        return render_template("admin.html", campusList = campusList('*'))
 
 @app.route("/apply")
 def apply(): 
-    return render_template("apply.html")
+    return render_template("apply.html", resume = render_template('apply/resume.html'), coverLetter = render_template('apply/coverLetter.html'), destination = render_template('apply/destination.html'))
+
+#api routes 
+@app.route("/adminLogin", methods = ['POST'] )
+def adminLogin(): 
+    session["userType"] = "admin"
+    return redirect(url_for("admin"))
+    
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
