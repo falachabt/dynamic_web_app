@@ -258,3 +258,7 @@ hr{
     color: white;
     border-radius: 20px;
  }
+ 
+ div.auth{
+    padding: 40px;
+ }
