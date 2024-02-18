@@ -2,9 +2,12 @@
 {% block title %} list {% endblock %}
 
 {% block content %}
-<div class='vertical' style='padding: 40px;'>
-   <h1>Candidatures déposées</h1>
-   <h2>Contactez support@icam.fr si votre nom n'apparait pas.</h2>
+<div class='vertical'>
+   <div class='colorBanner'>
+      <h1 class='contentTitle'>Candidatures déposées</h1>
+   </div>
+   <div class='vertical onTop' style='padding: 40px;'>
+      <h2>Contactez support@icam.fr si votre nom n'apparait pas.</h2>
    <table>
       <tr>
          <th>Email</th>
@@ -12,5 +15,6 @@
       </tr>
       {{list |safe}}
    </table>
+   </div>
 </div>
 {% endblock %}

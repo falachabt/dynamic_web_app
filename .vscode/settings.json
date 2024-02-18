@@ -3,5 +3,34 @@
         "activityBar.background": "#07351E",
         "titleBar.activeBackground": "#0A4A2A",
         "titleBar.activeForeground": "#F1FDF7"
-    }
+    },
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "VivienViaVSCode",
+            "database": "PBLMIA11",
+            "username": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Vivien2ndTry",
+            "database": "PBLMIA11",
+            "username": "root",
+            "password": ""
+        }
+    ]
 }
