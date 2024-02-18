@@ -34,7 +34,7 @@ def database():
 
     return rows
 
-def custom_hash(data):
+def hash(data):
     # Using SHA-1 hashing algorithm
     hash_object = hashlib.sha1(data.encode())
     # Getting the hexadecimal representation of the hash and taking the first 20 characters
