@@ -20,15 +20,18 @@ def Usersignup(mysql, email, password, secret):
         # issue with password hash
         # hashed_password = generate_password_hash(password)
         role = getRole(secret)
+        print(role)
+        print(password)
         if role is None:
             raise ValueError("Wrong secret")
             
-        cur.execute("INSERT INTO users (email, password, role) VALUES (%s, %s)", (email, password, role))
+        cur.execute("INSERT INTO users (email, password, role) VALUES (%s, %s, %s)", (email, password, role))
         mysql.connection.commit()
         cur.close()
         return True, None
     except Exception as e:
         error_message = str(e)
+        print(error_message)
         return False, error_message
 
 def Userlogin(mysql : MySQL, email : str, password: str):

@@ -175,7 +175,7 @@ def signup_api():
         if not exist:
             [ success, er_message ] =  Usersignup(mysql, email, password, secret)
             if success is False:
-                return redirect(url_for("signup"), error = "wrong secret" ) 
+                return redirect(url_for("signup",error = "wrong secret" ), ) 
             
             print(er_message)
             return redirect(url_for("login"))
