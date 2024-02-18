@@ -1,45 +1,33 @@
 {% extends 'base.html' %} {% block title %} Login {% endblock %} {% block
 content %}
 
-<div class="login">
-  <div>
-
-  </div>
-  <div class="login-container">
+<div class="centered">
+  <h1>Login to your account</h1>
+  <div class="form" style='padding: 40px;'>
     {% if error %}
     <span class="error_message" > {{ error }} </span>
     {% endif %}
-    <h2>Login</h2>
     <form action="/api/login" method="post">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-        />
-      </div>
-
-      <div class="form-group">
+      <div class='vertical vspaced'>
+        <div class="horizontal">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="example@icam.form"/>
+        </div>
+  
+        <div class="horizontal">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="ex@mp1e"/>
+        </div>
         <button type="submit">Login</button>
       </div>
     </form>
+
     <div style="text-align: center">
-      <hr />
-      or don't have an account ?
-      <hr />
-      <a href="{{url_for('signup')}}"> Signup </a>
+      <hr>
+      <p>
+        Don't have an account ?
+      </p>
+      <a class='pill' href="{{url_for('signup')}}"> Signup </a>
     </div>
   </div>
 </div>

@@ -141,6 +141,21 @@ th{
     background-color: rgba(255, 255, 255, 0.707);
 }
 
+.pill{
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.150);
+    padding: 7px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: black;
+    transition: .3s;
+    width: 100vw;
+}
+
+.pill:hover{
+    background-color: rgb(242, 242, 242);
+}
+
 .vertical{
     display: flex;
     flex-direction: column;
@@ -151,6 +166,19 @@ th{
     flex-direction: row;
     justify-content:space-between;
     align-items: center;
+}
+
+.centered{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
 }
 
 .stickRight{
@@ -176,7 +204,7 @@ a{
 
 /*****************  FORMS   **********************/
 
-form{
+.form{
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -194,6 +222,7 @@ input{
     border: none;
     border-radius: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.150);
+    font-family: 'Montserrat';
 }
 
 button{
@@ -217,51 +246,15 @@ form > *{
 
 hr{
     width: 100%;
-    border: none;
+    border: 1px solid gray;
 }
 
 /*****************  AUTHENTICATION   **********************/
 
-.register-to-campus {
-    max-width: 400px;
-    margin: 0 auto;
- }
- 
- .form-group {
-    margin-bottom: 20px;
- }
- 
- label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
- }
- 
- input[type="email"],
- select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
- }
- 
- button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
- }
- 
- button[type="submit"]:hover {
-    background-color: #0056b3;
- }
-
-
  .error_message {
     padding: 10px 20px;
-    margin: 10px 20px;
-    width: 100%;
-    background-color: rgba(210, 11, 11, 0.594);
+    margin-bottom: 40px;
+    background-color: red;
+    color: white;
+    border-radius: 20px;
  }
