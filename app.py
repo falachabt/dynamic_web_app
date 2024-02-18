@@ -135,6 +135,7 @@ def signup():
 def logout():
     if(session.get("user")):
         session.pop("user")
+        session.pop("userType")
     return redirect(url_for("login"))
 
 
@@ -190,8 +191,9 @@ def login_api():
         email = request.form.get("email")
         password = request.form.get("password")
         [user, errormessage ] = Userlogin(mysql, email, password)
-       
         if user != None:
+            print(user[3])
+            session["userType"] = user[3]
             session['user'] = user[0]
             return redirect(url_for("list"))
         else:
