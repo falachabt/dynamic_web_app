@@ -159,49 +159,6 @@ def apply():
 def adminLogin(): 
     session["userType"] = "admin"
     return redirect(url_for("admin"))
-    
-
-
-
-
-
-
-
-'''
-API ROUTES
-'''
-@app.route('/api/signup', methods=['POST'])
-def signup_api():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        [ exist, message ] = check_user_exists(mysql, email); 
-        print(exist)
-        print(message)
-        if not exist:
-            [ success, er_message ] =  Usersignup(mysql, email, password)
-            print(success)
-            print(er_message)
-            return redirect(url_for("login"))
-        else:
-            return  redirect(url_for("signup", error = "User already exists" ))
-    else:
-        return redirect(url_for("signup", error = "Invalid request method" ))
-
-@app.route('/api/login', methods=['POST'])
-def login_api():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        [user, errormessage ] = Userlogin(mysql, email, password)
-       
-        if user != None:
-            session['user'] = user[0]
-            return redirect(url_for("list"))
-        else:
-            return redirect(url_for("login", error = "Invalid email or password"))
-    else:
-        return redirect(url_for("login", error = "Invalid request method"))
 
 '''
 API ROUTES

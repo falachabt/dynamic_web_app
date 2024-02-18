@@ -81,12 +81,23 @@ nav a.special{
     border: none;
 }
 
+nav a.critical{
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+}
+
 nav a:hover{
     background-color: rgb(242, 242, 242);
 }
 
 nav a.special:hover{
     color: orange;
+}
+
+nav a.critical:hover{
+    background-color: red;
+    color: white;
 }
 
 /*****************  PAGE CONTENT   **********************/
