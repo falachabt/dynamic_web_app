@@ -43,11 +43,7 @@ def Userlogin(mysql : MySQL, email : str, password: str):
         error_message = str(e)
         return None, error_message
 
-<<<<<<< HEAD
 def check_user_exists(mysql: MySQL, email: str):
-=======
-def check_user_exists(mysql, email):
->>>>>>> 988bb1eccf2d5e5cc9ac145163f83461cc5716b1
     try:
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM users WHERE email = %s", (email,))

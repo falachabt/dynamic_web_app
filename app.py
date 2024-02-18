@@ -15,6 +15,8 @@ mysql = MySQL(app)
 
 app.secret_key = '12345678'
  
+admin_code = "board_123"
+student_code = "2027" 
 
 def database():
     # Create a cursor object
