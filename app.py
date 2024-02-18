@@ -56,7 +56,6 @@ def campusList(arg):
         return htmlCode
     except Exception as e:
         error_message = str(e)
-        # print("error code :", e[0])
         print(error_message)
         return  error_message
 
