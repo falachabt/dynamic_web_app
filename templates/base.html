@@ -11,14 +11,14 @@
 </head>
 
 <body>
-    <header>
+    <header class='blur'>
         
                 <img src="{{ url_for('static', filename='images/logotype-seul-couleur-RVB.png') }}" class="logo" alt="icam logo" srcset="">
          
 
         <nav>
             <a href="{{ url_for('hello') }}" class="{% if active_page == 'hello' %}active{% endif %}">Home</a>
-            <a href="{{ url_for('list') }}" class="{% if active_page == 'list' %}active{% endif %}">List</a>
+            <a href="{{ url_for('list') }}" class="{% if active_page == 'list' %}active{% endif %}">Applications</a>
             <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %}">Admin Portal</a>
             <a href="{{ url_for('add') }}" class="special ">Apply</a>
         </nav>

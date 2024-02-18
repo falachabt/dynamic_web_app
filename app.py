@@ -41,24 +41,26 @@ def studentList():
     
     return htmlCode
 
-def campusList():
+def campusList(arg):
     # Create a cursor object
     cur = mysql.connection.cursor()
 
     htmlCode = ""
 
-    cur.execute("SELECT campusName FROM Campus ")
+    cur.execute("SELECT " + arg + " FROM Campus ")
     for rows in cur.fetchall():
-        htmlCode += "<tr><td><td>" + str(rows[0]) + '</td></tr>'
+        htmlCode += "<tr>"
+        for col in rows:
+             htmlCode += "<td>" + str(col) + '</td>'
+        htmlCode += '</tr>'
 
     cur.close()
     
     return htmlCode
 
-
 @app.route('/')
 def hello():
-    return render_template('index.html', campusList = campusList())
+    return render_template('index.html', campusList = campusList('campusName'))
 
 @app.route("/list")
 def list():
@@ -66,7 +68,7 @@ def list():
 
 @app.route("/admin")
 def admin():
-    return render_template("admin.html")
+    return render_template("admin.html", campusList = campusList('*'))
 
 @app.route("/add")
 def add(): 

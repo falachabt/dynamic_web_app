@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style='height: 100%;display: block; position: fixed;width: 100%;'>
-   <div class='horizontal' id='mainPage'>
-      <!--<img src="{{ url_for('static', filename='images/plane.jpg') }}" class='map' alt="icam map" srcset="">-->
-      <div class='vertical floating'>
-         <h1 class='mainTitle'>Administrator Portal</h1>
-         <h3>Please enter your login credentials.</h3>
-      </div>
+<div class='vertical vspaced'>
+   <h1 class='mainTitle'>Administrator Portal</h1>
+   <h3>Campuses</h3>
+   <div class='horizontal'>
+      <table class='stickRight'>
+         {{campusList | safe}}
+      </table>
+      <form action='addsave' method='GET'>
+         <h4>Add new</h4>
+         <div class='horizontal'>
+            <label>Campus name</label>
+            <input type='campusName' name='campusName' required>
+         </div>
+         <div class='horizontal'>
+            <label>Campus index</label>
+            <input type='campusIndex' name='campusIndex' required>
+         </div>
+         <hr>
+         <button type='submit'>
+            Submit
+         </button>
+      </form>
    </div>
 </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style='height: 100%;display: block; position: fixed;width: 100%;'>
+<div>
    <div class='horizontal' id='mainPage'>
       <!--<img src="{{ url_for('static', filename='images/plane.jpg') }}" class='map' alt="icam map" srcset="">-->
       <div class='vertical floating'>
@@ -17,8 +17,6 @@
          <table>
             {{campusList | safe}}
          </table>
-         <img src="{{ url_for('static', filename='images/map.png') }}" alt='' style='height: 500px;'>
-         <img src="{{ url_for('static', filename='images/map.png') }}" alt='' style='height: 500px;'>
       </div>
    </div>
 </div>
