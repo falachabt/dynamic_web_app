@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Admin Portal {% endblock %}
+
+{% block content %}
+<div class='vertical vspaced'>
+   <h1 class='mainTitle'>Administrator Portal</h1>
+   <h3>Campuses</h3>
+   <div class='horizontal'>
+      <table class='stickRight'>
+         {{campusList | safe}}
+      </table>
+      <form action='addCampus' method='GET' class='outlined'>
+         <h4>Add new</h4>
+         <div class='horizontal'>
+            <label>Campus name</label>
+            <input type='campusName' name='campusName' class='outlined' required>
+         </div>
+         <div class='horizontal'>
+            <label>Campus index</label>
+            <input type='campusIndex' name='campusIndex' class='outlined' required>
+         </div>
+         <hr>
+         <button type='submit' class='outlined'>
+            Submit
+         </button>
+      </form>
+   </div>
+</div>
+{% endblock %}
