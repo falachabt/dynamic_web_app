@@ -27,7 +27,7 @@ def database():
 
     return rows
 
-def contactList():
+def studentList():
     # Create a cursor object
     cur = mysql.connection.cursor()
 
@@ -41,14 +41,32 @@ def contactList():
     
     return htmlCode
 
+def campusList():
+    # Create a cursor object
+    cur = mysql.connection.cursor()
+
+    htmlCode = ""
+
+    cur.execute("SELECT campusName FROM Campus ")
+    for rows in cur.fetchall():
+        htmlCode += "<tr><td><td>" + str(rows[0]) + '</td></tr>'
+
+    cur.close()
+    
+    return htmlCode
+
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    return render_template('index.html', campusList = campusList())
 
 @app.route("/list")
 def list():
-    return render_template("list.html", list = contactList())
+    return render_template("list.html", list = studentList())
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
 
 @app.route("/add")
 def add(): 

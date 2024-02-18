@@ -38,8 +38,6 @@ body {
 
 header {
     width: calc(100% - 20px);
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(50px);
     position: sticky;
     top: 0;
     z-index: 3000;
@@ -62,83 +60,42 @@ header .logo {
 nav a {
     color: #333;
     font-size: 1.1em;
-    padding: 10px 20px;
+    padding: 5px 20px;
     text-decoration: none;
-    border: solid 1px transparent;
-    border-radius: 5px;
-}
-
-a.special {
-    background-color: rgba(255, 166, 0, 0.604);
-    border-radius: 5px;
-    color: black !important;
-    transition: .1s;
-}
-
-a.special:hover {
-    background-color: rgb(255, 181, 45);
-}
-
-nav a:hover {
-    color: indigo;
     border: solid 1px gray;
+    border-radius: 20px;
+    transition: .2s;
 }
 
-nav a.active {
-    color: indigo ; 
+nav a.special{
+    background-color: orange;
+    color: white;
+    border: none;
+}
+
+nav a:hover{
+    background-color: gray;
+    color: white;
 }
 
 /*****************  PAGE CONTENT   **********************/
 
 .content {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     display: block;
+    padding: 40px;
     overflow-y: scroll;
-    overflow-x: hidden;
+    height: calc(100vh - 160px);
 }
 
-.vertical{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-}
-
-.horizontal{
-    display: flex;
-    flex-direction: row;
-}
-
-#mainPage{
-    max-width: 100%;
-    align-items: start;
-    justify-content: space-between;
-    overflow: hidden;
-    height: inherit;
-}
-
-.map{
-    width: 100%;
-}
-
-.mapAera{
-    width: 500px;
-    overflow: hidden;
-    display: flex;
-}
-
-.mainTitle{
-    font-size: 2em;
-    text-align: left;
-}
+/*****************  TABLE STYLE   **********************/
 
 table{
-    width: calc(100vw - 80px);
     border-collapse: collapse;
+}
+
+table > *:last-child{
+    border-bottom: none;
 }
 
 tr{
@@ -159,63 +116,4 @@ th{
     font-family: 'Montserrat Bold';
     text-align: left;
     padding: 5px 10px;
-}
-
-a{
-    color:  gray;
-    text-decoration: none;
-}
-
-a:hover{
-    text-decoration: underline;
-}
-
-.colorBanner{
-    background-color: orange;
-    width: calc(100% - 80px);
-    height: 200px;
-    padding: 40px;
-}
-
-.contentTitle{
-    color: white;
-    position:fixed;
-    margin-top: 160px;
-}
-
-.wideButton{
-    color: black;
-    background-color: white;
-    width: calc(100% - 20px);
-    text-align: center;
-    border-radius: 5px;
-    padding: 10px;
-    transition: .1s;
-}
-
-.wideButton:hover{
-    text-decoration: none;
-    scale: .95;
-    cursor: pointer;
-}
-
-.onTop{
-    z-index: 2000;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.400);
-}
-
-.floating{
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    color: white;
-    padding: 40px;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.400);
-}
-
-.blurred{
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(50px);
-    padding: 20px 40px;
 }
