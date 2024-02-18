@@ -43,21 +43,22 @@ def studentList():
     return htmlCode
 
 def campusList(arg):
-    # Create a cursor object
-    cur = mysql.connection.cursor()
-
-    htmlCode = ""
-
-    cur.execute("SELECT " + arg + " FROM Campus ORDER BY idCampus")
-    for rows in cur.fetchall():
-        htmlCode += "<tr>"
-        for col in rows:
-             htmlCode += "<td>" + str(col) + '</td>'
-        htmlCode += '</tr>'
-
-    cur.close()
-    
-    return htmlCode
+    try:
+        cur = mysql.connection.cursor()
+        htmlCode = ""
+        cur.execute("SELECT " + arg + " FROM Campus ORDER BY idCampus")
+        for rows in cur.fetchall():
+            htmlCode += "<tr>"
+            for col in rows:
+                htmlCode += "<td>" + str(col) + '</td>'
+            htmlCode += '</tr>'
+        cur.close()
+        return htmlCode
+    except Exception as e:
+        error_message = str(e)
+        # print("error code :", e[0])
+        print(error_message)
+        return  error_message
 
 @app.route('/addCampus', methods =['POST'])
 def addCampus():
