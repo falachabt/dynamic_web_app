@@ -2,45 +2,32 @@
     content %}
 
 <div class='centered'>
-  <h1>Signup</h1>
-</div>
-    <div class="login">
-      <div class="login-container">
-        <h2>Signup</h2>
-        {{ error }}
-        <form action="/api/signup" method="post">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-            />
-          </div>
-    
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter your password"
-            />
-          </div>
-    
-          <div class="form-group">
-            <button type="submit"> Signup </button>
-          </div>
-        </form>
-        <div style="text-align: center;">
-          <hr>
-          have an account ?
-          <hr>
-          <a href="{{url_for('login')}}"> Login </a>
+  <h1>Signup for mobility</h1>
+  <div class='form auth'>
+    {% if error %}
+      <span class="error_message" > {{ error }} </span>
+    {% endif %}
+    <form action="/api/signup" method="post">
+      <div class='vertical vspaced'>
+        <div class="horizontal">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="example@icam.fr"/>
         </div>
+        <div class="horizontal">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="ex@mp1e"/>
+        </div>
+        <button type="submit"> Signup </button>
       </div>
+    </form>
+    <div style="text-align: center;">
+      <hr>
+      <p>
+        Already have an account ?
+      </p>
+      <a class='pill' href="{{url_for('login')}}"> Login </a>
     </div>
-    
-    {% endblock %}
-    
+  </div>
+</div>
+
+{% endblock %}
