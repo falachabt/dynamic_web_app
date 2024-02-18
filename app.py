@@ -59,7 +59,7 @@ def campusList(arg):
     
     return htmlCode
 
-@app.route('/addCampus', methods =['GET'])
+@app.route('/addCampus', methods =['POST'])
 def addCampus():
     cur = mysql.connection.cursor()
     sql = "INSERT INTO Campus(idCampus, campusName) VALUES (%s, %s)"
