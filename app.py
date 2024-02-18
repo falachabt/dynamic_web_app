@@ -72,6 +72,10 @@ def choices():
 
 @app.route('/login')
 def login(): 
+    print(session.get("user"))
+    if(session.get("user")):
+       return redirect(url_for("list"))
+        
     error = request.args.get('error')
     return render_template('login.html', error = error)
 
@@ -79,6 +83,13 @@ def login():
 def signup(): 
     error = request.args.get('error')
     return render_template('signup.html', error = error)
+
+@app.route('/logout')
+def logout():
+    if(session.get("user")):
+        session.pop("user")
+    return redirect(url_for("login"))
+
 
 @app.route("/list")
 def list():
@@ -118,15 +129,19 @@ def login_api():
         email = request.form.get("email")
         password = request.form.get("password")
         [user, errormessage ] = Userlogin(mysql, email, password)
-        # print(user)
-        print(" errorMessage :  ", errormessage)
+       
         if user != None:
-            session['user'] = user  
+            session['user'] = user[0]
             return redirect(url_for("list"))
         else:
             return redirect(url_for("login", error = "Invalid email or password"))
     else:
         return redirect(url_for("login", error = "Invalid request method"))
+
+
+
+
+
 
 
 

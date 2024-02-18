@@ -17,8 +17,9 @@ def Usersignup(mysql, email, password):
                 )
             """)
             
-        hashed_password = generate_password_hash(password)
-        cur.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, hashed_password))
+        # issue with password hash
+        # hashed_password = generate_password_hash(password)
+        cur.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
         mysql.connection.commit()
         cur.close()
         return True, None
@@ -26,16 +27,16 @@ def Usersignup(mysql, email, password):
         error_message = str(e)
         return False, error_message
 
-def Userlogin(mysql, email, password: str):
+def Userlogin(mysql : MySQL, email : str, password: str):
     try:
         cur = mysql.connection.cursor()
-        cur.execute("SELECT password FROM users WHERE email = %s", (email,))
-        pw_hash = cur.fetchone()[0]
+        cur.execute("SELECT * FROM users WHERE email = %s AND password = %s " , (email,password))
+        user = cur.fetchone()
         cur.close()
         
-        print("test :", check_password_hash(pw_hash, password))
-        if pw_hash and check_password_hash(pw_hash, password):
-            return True, None
+        # if pw_hash and check_password_hash(pw_hash, password):
+        if user :
+            return user, None
         else:
             return None, "Invalid email or password"
     except Exception as e:
