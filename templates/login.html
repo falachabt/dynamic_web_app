@@ -1,24 +1,35 @@
+{% extends 'base.html' %} {% block title %} Login {% endblock %} {% block
+content %}
 
-{% extends 'base.html' %}
-{% block title %} Admin login {% endblock %}
-
-{% block content %}
-
-<div style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 300px); width: 100%;" >
-
-    <form action="/adminLogin" method="post">
-        <h3> Admin login </h3>
+<div class="centered">
+  <h1>Login to your account</h1>
+  <div class="form" style='padding: 40px;'>
+    {% if error %}
+    <span class="error_message" > {{ error }} </span>
+    {% endif %}
+    <form action="/api/login" method="post">
+      <div class='vertical vspaced'>
         <div class="horizontal">
-            <label for="admin_email"> email </label>
-            <input type="email" name="" id="admin_email">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="example@icam.form"/>
         </div>
+  
         <div class="horizontal">
-            <label for="admin_password"> password </label>
-            <input type="password" name="" id="admin_password">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="ex@mp1e"/>
         </div>
-        <div class="horizontal">
-            <button type="submit"> Login </button>
-        </div>
+        <button type="submit">Login</button>
+      </div>
     </form>
+
+    <div style="text-align: center">
+      <hr>
+      <p>
+        Don't have an account ?
+      </p>
+      <a class='pill' href="{{url_for('signup')}}"> Signup </a>
+    </div>
+  </div>
 </div>
+
 {% endblock %}
