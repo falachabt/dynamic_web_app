@@ -5,7 +5,16 @@ block content %}
   <h1>Current Applications</h1>
   <div class='horizontal searchBundle' style='width: auto;'>
     <input type="text" id='search' class='search pill outlined' placeholder="Look up applicants by email or destination"  defaultValue="{{search}}"   />
-    <a type='submit' class='pill outlined' style='cursor: pointer; width: auto;' id="search_button">Search</a>
+    <a type='submit' class='pill outlined' style='cursor: pointer; width: auto;' id="search_button">
+      <div class="horizontal" style="display: flex; align-items: center; gap: 5px;" >
+
+        
+        Search
+        <span class="material-symbols-outlined">
+          search
+        </span>
+      </div>
+      </a>
   </div>
   <table class="choices-table">
     <thead>
