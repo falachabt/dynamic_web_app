@@ -107,54 +107,18 @@ def addStudent():
     cur.execute("SELECT MAX(idmobilitywish) FROM mobilitywish")
     studentCount = cur.fetchall()[0][0] + 1
     sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
-    val = (studentCount, request.values['studentMail'], request.values['idCampus'])
+    if session.get('userType') == 'admin':
+        val = (studentCount, request.values['studentMail'], request.values['idCampus'])
+    else:
+        val = (studentCount, session.get("email"), request.values['idCampus'])
     cur.execute(sql,val)
     mysql.connection.commit()
     userType = session.get("userType")
     match userType:
-        case "amdin":
+        case "admin":
             return redirect(url_for('admin'))
         case "student":
-            return redirect(url_for('choices'))
-      
-            
-@app.route('/addStudent1', methods =['POST'])
-def addStudent1():
-    try:
-        cur = mysql.connection.cursor()
-        
-        email = session.get("email")
-        
-        tesql = '''SELECT * FROM mobilitywish WHERE studentmail = %s '''
-        cur.execute(tesql, (email,))
-        exist = None
-        data = cur.fetchall()
-        if(len(data) != 0):
-            exist = data[0][0]  
-        
-        if exist is None:
-            cur.execute("SELECT MAX(idmobilitywish) FROM mobilitywish")
-            sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
-            idMobi = cur.fetchall()[0][0] + 1
-            val = (idMobi, email, request.values['idCampus'])
-            cur.execute(sql,val)
-            mysql.connection.commit()
-        else : 
-            return redirect(url_for("apply", error = "Cannot apply twice."))
-            
-        userType = session.get("userType")
-        match userType:
-            case "amdin":
-                return redirect(url_for('admin'))
-            case "student":
-                return redirect(url_for('choices'))
-    except Exception as e:
-        message = str(e)
-        print(message)
-        # print("Duplicata" in message)
-        flash("")
-        return redirect(url_for("apply"))
-            
+            return redirect(url_for('choices'))    
 
 @app.route('/')
 def hello():
