@@ -64,7 +64,7 @@ def campusList(arg, dev):
             for col in rows:
                 htmlCode += "<td>" + str(col) + '</td>'
             if dev:
-                htmlCode += '<td><a type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" >Remove</a></td>'
+                htmlCode += '<td><a type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
             htmlCode += '</tr>'
         cur.close()
         return htmlCode
