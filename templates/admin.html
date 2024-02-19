@@ -12,13 +12,15 @@
       <div class='form auth outlined'>
          <form action='addCampus' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
             <h3 class='formTitle'>Insert Campus</h3>
-            <div class='horizontal'>
-               <label>Campus name</label>
-               <input type='campusName' name='campusName' class='outlined' required>
-            </div>
-            <div class='horizontal'>
-               <label>Campus index</label>
-               <input type='campusIndex' name='campusIndex' class='outlined' required>
+            <div class='vertical formSpaced'>
+               <div class='horizontal'>
+                  <label>Campus name</label>
+                  <input type='campusName' name='campusName' class='outlined' required>
+               </div>
+               <div class='horizontal'>
+                  <label>Campus index</label>
+                  <input type='campusIndex' name='campusIndex' class='outlined' required>
+               </div>
             </div>
             <hr>
             <button type='submit' class='outlined pill' style='width: 100%;margin-top: 10px;'>Insert</a>
@@ -32,15 +34,21 @@
          {{studentList | safe}}
       </table>
       <div class='form auth outlined'>
-         <form action='addCampus' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
+         <form action='addStudent' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
             <h3 class='formTitle'>Insert Applicant</h3>
-            <div class='horizontal'>
-               <label>Campus name</label>
-               <input type='studentMail' name='studentMail' class='outlined' required>
-            </div>
-            <div class='horizontal'>
-               <label>Campus index</label>
-               <input type='campusIndex' name='campusIndex' class='outlined' required>
+            <div class='vertical formSpaced'>
+               <div class='horizontal'>
+                  <label>Mobility id</label>
+                  <input type='idmobilitywish' name='idmobilitywish' class='outlined' required>
+               </div>
+               <div class='horizontal'>
+                  <label>Student email</label>
+                  <input type='studentMail' name='studentMail' class='outlined' required>
+               </div>
+               <div class='horizontal'>
+                  <label>Campus index</label>
+                  <input type='idCampus' name='idCampus' class='outlined' required>
+               </div>
             </div>
             <hr>
             <button type='submit' class='outlined pill' style='width: 100%;margin-top: 10px;'>Insert</a>

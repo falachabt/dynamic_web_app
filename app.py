@@ -93,6 +93,15 @@ def addCampus():
     mysql.connection.commit()
     return render_template("admin.html", campusList = campusList('*', True))
 
+@app.route('/addStudent', methods =['POST'])
+def addStudent():
+    cur = mysql.connection.cursor()
+    sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
+    val = (request.values['idmobilitywish'], request.values['studentMail'], request.values['idCampus'])
+    cur.execute(sql,val)
+    mysql.connection.commit()
+    return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True))
+
 @app.route('/')
 def hello():
     return render_template('index.html', campusList = campusList('campusName', False))

@@ -238,7 +238,7 @@ form > h4{
     margin: 10px 0;
 }
 
-form > *{
+.formSpaced > *{
     margin-bottom: 10px;
 }
 
