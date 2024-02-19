@@ -43,7 +43,9 @@
         {% endif %}
 
         {% if not session.get("user") %}
-        <a href="{{ url_for('login') }}" class="special">Login</a>
+        <a href="{{ url_for('login') }}" class="special"> <span class="material-symbols-outlined">
+          login
+          </span> Login</a>
         {% endif %}
       </nav>
     </header>
