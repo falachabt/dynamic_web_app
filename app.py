@@ -58,7 +58,10 @@ def studentList(dev):
         elif dev:
             htmlCode += "<tr>"
             for col in rows:
-                htmlCode += "<td>" + str(col) + '</td>'
+                htmlCode += "<td"
+                if col == rows[0] and dev:
+                    htmlCode += " class = idColumn"
+                htmlCode += ">" + str(col) + '</td>'
             htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteStudent?mid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
         htmlCode += '</tr>'
 
@@ -74,7 +77,10 @@ def campusList(arg, dev):
         for rows in cur.fetchall():
             htmlCode += "<tr>"
             for col in rows:
-                htmlCode += "<td>" + str(col) + '</td>'
+                htmlCode += "<td"
+                if col == rows[0] and dev:
+                    htmlCode += " class = idColumn"
+                htmlCode += ">" + str(col) + '</td>'
             if dev:
                 htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
             htmlCode += '</tr>'

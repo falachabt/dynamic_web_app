@@ -14,8 +14,12 @@
 {% endwith %}
 
    <h3>Campuses</h3>
-   <div class='horizontal'>
+   <div class='horizontal startAlign'>
       <table class='stickRight'>
+         <tr>
+            <th class='idColumn'>ID</th>
+            <th>Campus</th>
+         </tr>
          {{campusList | safe}}
       </table>
       <div class='form auth outlined'>
@@ -34,8 +38,13 @@
    </div>
 
    <h3>Applicants</h3>
-   <div class='horizontal'>
+   <div class='horizontal startAlign'>
       <table class='stickRight'>
+         <tr>
+            <th class='idColumn'>ID</th>
+            <th>email</th>
+            <th>Preferred destination</th>
+         </tr>
          {{studentList | safe}}
       </table>
       <div class='form auth outlined'>

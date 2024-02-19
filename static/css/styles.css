@@ -137,6 +137,14 @@ th{
     padding: 5px 10px;
 }
 
+.idColumn{
+    font-family: monospace;
+    font-size: 1em;
+    width: 20px;
+    color: rgba(0, 0, 0, 0.50);
+    align-self: center;
+}
+
 /*****************  GLOBAL STYLES   **********************/
 
 .blur{
@@ -211,6 +219,10 @@ a, button{
 
 .autoWidth{
     width: auto;
+}
+
+.startAlign{
+    align-items: start;
 }
 
 /*****************  FORMS   **********************/
