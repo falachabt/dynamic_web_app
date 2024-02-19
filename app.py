@@ -106,6 +106,21 @@ def addStudent():
             return redirect(url_for('admin'))
         case "student":
             return redirect(url_for('choices'))
+      
+            
+@app.route('/addStudent1', methods =['POST'])
+def addStudent1():
+    cur = mysql.connection.cursor()
+    sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
+    val = (request.values['idmobilitywish'], request.values['studentMail'], request.values['idCampus'])
+    cur.execute(sql,val)
+    mysql.connection.commit()
+    userType = session.get("userType")
+    match userType:
+        case "amdin":
+            return redirect(url_for('admin'))
+        case "student":
+            return redirect(url_for('choices'))
             
 
 @app.route('/')
@@ -185,7 +200,12 @@ def admin():
 
 @app.route("/apply")
 def apply(): 
-    return render_template("apply.html", resume = render_template('apply/resume.html'), coverLetter = render_template('apply/coverLetter.html'), destination = render_template('apply/destination.html'))
+    cur = mysql.connection.cursor()
+    query = '''SELECT * FROM campus'''
+    cur.execute(query)
+    campuses = cur.fetchall()
+    
+    return render_template("apply.html", campuses = campuses)
 
 #api routes 
 @app.route("/adminLogin", methods = ['POST'] )

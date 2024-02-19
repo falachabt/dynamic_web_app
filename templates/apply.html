@@ -6,13 +6,16 @@
 <div style=" height: calc(100vh-50px); width: calc(100vw-100px) ;  display: flex; justify-content: center; align-items: center;">
 
    <div  class='form auth outlined'>
-      <form action='addStudent' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
+      <form action='addstudent1' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
       <h3 class='formTitle'>Insert Applicant</h3>
       <div class='vertical formSpaced'>
          
-         <div class='horizontal'>
+         <div class='horizontal' style="display: grid;">
             <label>Campus index</label>
             <select type='idCampus' name='idCampus' class='outlined pill autoWidth'  required >
+               {% for campus in campuses %}
+                 <option value="{{campus[0]}}">{{campus[1]}}</option>
+               {% endfor %}
                <option value="3"> douala </option>
             </select>
          </div>
