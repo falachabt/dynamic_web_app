@@ -4,6 +4,14 @@
 {% block content %}
 <div class='vertical vspaced'>
    <h1 class='mainTitle'>Administrator Portal</h1>
+   {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="error_message">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+{% endwith %}
+
    <h3>Campuses</h3>
    <div class='horizontal'>
       <table class='stickRight'>

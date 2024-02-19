@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, flash
 from flask import request
 from flask_mysqldb import MySQL
 from utils.auth import Usersignup, Userlogin, check_user_exists
@@ -225,13 +225,20 @@ def login_api():
 
 @app.route('/api/deleteCampus')
 def deleteCampus():
-    cur = mysql.connection.cursor()
-    query = 'DELETE FROM Campus WHERE idCampus=' + str(request.values.get('cid'))
-    print(query)
-    cur.execute(query)
-    mysql.connection.commit()
-    cur.close()
-    return redirect(url_for("admin"))
+    try:
+        cur = mysql.connection.cursor()
+        query = 'DELETE FROM Campus WHERE idCampus=' + str(request.values.get('cid'))
+        print(query)
+        cur.execute(query)
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for("admin"))
+    except Exception as e:
+        message = e
+        if "FOREIGN" in str(e):
+            message = "Student apply for this campus"
+        flash(message)
+        return redirect(url_for("admin", message = e))
 
 
 
@@ -259,7 +266,6 @@ def upload_file():
 def deleteStudent():
     cur = mysql.connection.cursor()
     query = 'DELETE FROM mobilityWish WHERE idMobilityWish=' + str(request.values.get('mid'))
-    print(query)
     cur.execute(query)
     mysql.connection.commit()
     cur.close()
