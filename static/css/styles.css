@@ -256,11 +256,12 @@ input{
 }
 
 a, button{
-    transition: .2ms;
+    transition: .15ms;
 }
 
 a:hover, button:hover{
     box-shadow: 0 2px 10px rgba(255, 140, 0, 0.681);
+    color: orange;
 }
 
 .noEffect:hover{
