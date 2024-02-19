@@ -11,11 +11,12 @@
 
 <body style="overflow: hidden;">
     <header class='blur'>
-        
-      <a href="/">
-        <img src="{{ url_for('static', filename='images/logotype-seul-couleur-RVB.png') }}" class="logo" alt="icam logo" srcset="">
-      </a>
-         
+
+      <div class='horizontal'>
+        <a href="/">
+          <img src="{{ url_for('static', filename='images/logotype-seul-couleur-RVB.png') }}" class="logo" alt="icam logo" srcset="">
+        </a>
+      </div>
 
       <nav>
         {% if session.get("user") %}
@@ -28,11 +29,10 @@
         
         {% if session.get("user") and session.get("userType") != 'admin' %}
         <a href="{{ url_for('apply') }}" class="special">Apply</a>
-        <a href="{{ url_for('logout') }}" class="critical">Logout</a>
         {% endif %}
 
         {% if session.get("user") %}
-        <a href="{{ url_for('logout') }}" class="critical">Logout</a>
+        <a href="{{ url_for('logout') }}" class="critical">Log {{ session.get("email") }} out</a>
         {% endif %}
 
         {% if not session.get("user") %}

@@ -225,6 +225,7 @@ def login_api():
         if user != None:
             session["userType"] = user[3]
             session['user'] = user[0]
+            session['email'] = email
             return redirect(url_for("choices"))
         else:
             return redirect(url_for("login", error = "Invalid email or password"))
