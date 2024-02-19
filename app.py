@@ -91,7 +91,7 @@ def addCampus():
     val = (request.values['campusIndex'], request.values['campusName'])
     cur.execute(sql,val)
     mysql.connection.commit()
-    return render_template("admin.html", campusList = campusList('*', True))
+    return redirect(url_for('admin'))
 
 @app.route('/addStudent', methods =['POST'])
 def addStudent():
@@ -100,7 +100,7 @@ def addStudent():
     val = (request.values['idmobilitywish'], request.values['studentMail'], request.values['idCampus'])
     cur.execute(sql,val)
     mysql.connection.commit()
-    return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True))
+    return redirect(url_for('admin'))
 
 @app.route('/')
 def hello():
@@ -238,7 +238,7 @@ def deleteCampus():
     except Exception as e:
         message = e
         if "FOREIGN" in str(e):
-            message = "Student apply for this campus"
+            message = "Cannot delete, students have already applied for this campus."
         flash(message)
         return redirect(url_for("admin", message = e))
 
