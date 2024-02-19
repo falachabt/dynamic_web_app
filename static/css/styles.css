@@ -137,6 +137,14 @@ th{
     padding: 5px 10px;
 }
 
+.idColumn{
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 0;
+    width: 20px;
+    color: rgba(0, 0, 0, 0.50);
+}
+
 /*****************  GLOBAL STYLES   **********************/
 
 .blur{
