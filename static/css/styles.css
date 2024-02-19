@@ -79,7 +79,7 @@ nav a {
     border-radius: 20px;
     text-decoration: none;
     color: black;
-    transition: .3s;
+    transition: .15s;
     display: flex;
     align-items: center;
 }
@@ -165,7 +165,7 @@ th{
     border-radius: 20px;
     text-decoration: none;
     color: black;
-    transition: .3s;
+    transition: .15s;
     width: 100vw;
 }
 
