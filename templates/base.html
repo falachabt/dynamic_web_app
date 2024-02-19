@@ -18,13 +18,20 @@
          
 
       <nav>
-        {% if session.get("userType") == 'admin' %}
-        <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} outlined">Admin Portal</a>
-        {% endif %}
-        
         {% if session.get("user") %}
         <a href="{{ url_for('choices') }}" class="">Choices</a>
+        {% endif %}
+
+        {% if session.get("userType") == 'admin' %}
+        <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} special">Admin Portal</a>
+        {% endif %}
+        
+        {% if session.get("user") and session.get("userType") != 'admin' %}
         <a href="{{ url_for('apply') }}" class="special">Apply</a>
+        <a href="{{ url_for('logout') }}" class="critical">Logout</a>
+        {% endif %}
+
+        {% if session.get("user") %}
         <a href="{{ url_for('logout') }}" class="critical">Logout</a>
         {% endif %}
 
