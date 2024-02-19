@@ -4,7 +4,9 @@
 {% block content %}
 
 <div class='vertical vspaced'>
-   <h1 class='mainTitle'>Administrator Portal</h1>
+   <h1 class='mainTitle'> <span class="material-symbols-outlined">
+      admin_panel_settings
+      </span> Administrator Portal</h1>
    {% with messages = get_flashed_messages() %}
   {% if messages %}
     <div class="error_message">
@@ -13,7 +15,9 @@
   {% endif %}
 {% endwith %}
 
-   <h3>Campuses</h3>
+   <h3> <span class="material-symbols-outlined">
+      school
+      </span> Campuses</h3>
    <div class='horizontal startAlign'>
       <table class='stickRight'>
          <tr>
@@ -37,7 +41,9 @@
       </div>
    </div>
 
-   <h3>Applicants</h3>
+   <h3> <span class="material-symbols-outlined">
+      group
+      </span> Applicants</h3>
    <div class='horizontal startAlign'>
       <table class='stickRight'>
          <tr>
