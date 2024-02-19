@@ -87,8 +87,10 @@ def campusList(arg, dev):
 @app.route('/addCampus', methods =['POST'])
 def addCampus():
     cur = mysql.connection.cursor()
+    cur.execute("SELECT MAX(idCampus) FROM Campus")
+    campusCount = cur.fetchall()[0][0] + 1
     sql = "INSERT INTO Campus(idCampus, campusName) VALUES (%s, %s)"
-    val = (request.values['campusIndex'], request.values['campusName'])
+    val = (campusCount, request.values['campusName'])
     cur.execute(sql,val)
     mysql.connection.commit()
     return redirect(url_for('admin'))
