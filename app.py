@@ -100,7 +100,13 @@ def addStudent():
     val = (request.values['idmobilitywish'], request.values['studentMail'], request.values['idCampus'])
     cur.execute(sql,val)
     mysql.connection.commit()
-    return redirect(url_for('admin'))
+    userType = session.get("userType")
+    match userType:
+        case "amdin":
+            return redirect(url_for('admin'))
+        case "student":
+            return redirect(url_for('choices'))
+            
 
 @app.route('/')
 def hello():

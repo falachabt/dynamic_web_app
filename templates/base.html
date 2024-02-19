@@ -9,7 +9,7 @@
     <link rel='icon' href="{{ url_for('static', filename='images/logotype_short.png') }}">
 </head>
 
-<body>
+<body style="overflow: hidden;">
     <header class='blur'>
         
       <a href="/">
@@ -41,6 +41,6 @@
       </nav>
     </header>
 
-    <div class="content">{% block content %} {% endblock %}</div>
+    <div  class="content">{% block content %} {% endblock %}</div>
   </body>
 </html>

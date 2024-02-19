@@ -3,23 +3,25 @@
 {% block title %} Apply {% endblock %}
 
 {% block content %}
-   <div class="applyNav">
-      <a href="/apply/resume">Resume</a>
-      <a href="/apply/letter">Cover letter</a>
-      <a href="/apply/destination">Destination</a>
+<div style=" height: calc(100vh-50px); width: calc(100vw-100px) ;  display: flex; justify-content: center; align-items: center;">
+
+   <div  class='form auth outlined'>
+      <form action='addStudent' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
+      <h3 class='formTitle'>Insert Applicant</h3>
+      <div class='vertical formSpaced'>
+         
+         <div class='horizontal'>
+            <label>Campus index</label>
+            <select type='idCampus' name='idCampus' class='outlined pill autoWidth'  required >
+               <option value="3"> douala </option>
+            </select>
+         </div>
+      </div>
+      <hr>
+      <button type='submit' class='outlined pill' style='width: 100%;margin-top: 10px;'>Insert</a>
+      </form>
    </div>
-   
-   <form action="/api/apply">
-      <div class="horizontal">
-         {{ resume | safe}}
-      </div>
-      <div class="horizontal">
-         {{ coverLetter | safe}}
-      </div>
-      <div class="horizontal">
-         {{ destination | safe}}
-      </div>
-   </form>
+</div>
 
   
 {% endblock %}
