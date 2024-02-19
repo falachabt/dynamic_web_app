@@ -144,7 +144,7 @@ def choices():
 def login(): 
     print(session.get("user"))
     if(session.get("user")):
-       return redirect(url_for("list"))
+       return redirect(url_for("choices"))
         
     error = request.args.get('error')
     return render_template('login.html', error = error)
@@ -161,7 +161,9 @@ def logout():
         session.pop("userType")
     return redirect(url_for("login"))
 
-
+@app.route('/redirectPage')
+def redirectPage():
+    return render_template("redirect.html", lastPage = admin())
 
 @app.route("/list")
 def list():
@@ -217,7 +219,7 @@ def login_api():
         if user != None:
             session["userType"] = user[3]
             session['user'] = user[0]
-            return redirect(url_for("list"))
+            return redirect(url_for("choices"))
         else:
             return redirect(url_for("login", error = "Invalid email or password"))
     else:
