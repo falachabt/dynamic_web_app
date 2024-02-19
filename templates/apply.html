@@ -8,14 +8,14 @@
    <div  class='form auth outlined'>
       <form action='addStudent1' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
          {% if error %}
-         <span class="error_message" > {{ error }} </span>
+         <span class="error_message" style='margin-top: 0;'> {{ error }} </span>
        {% endif %}
       <h3 class='formTitle'>Insert Applicant</h3>
       <div class='vertical formSpaced'>
          
-         <div class='horizontal' style="display: grid;">
-            <label>Campus index</label>
-            <select type='idCampus' name='idCampus' class='outlined pill autoWidth'  required >
+         <div class='horizontal'>
+            <label style='margin-right: 10px;'>Select campus</label>
+            <select type='idCampus' name='idCampus' class='outlined pill' style='width: inherit;' required>
                {% for campus in campuses %}
                  <option value="{{campus[0]}}">{{campus[1]}}</option>
                {% endfor %}

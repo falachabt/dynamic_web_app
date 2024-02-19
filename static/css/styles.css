@@ -207,7 +207,7 @@ th{
     border: solid 1px rgb(210, 210, 210);
 }
 
-a, button{
+a, button, select{
     text-decoration: none;
     color: black;
     cursor: pointer;
@@ -253,6 +253,10 @@ a, button{
 
 a:hover, button:hover{
     box-shadow: 0 2px 10px rgba(255, 140, 0, 0.681);
+}
+
+.noEffect:hover{
+    box-shadow: none;
 }
 
 form > h4{
