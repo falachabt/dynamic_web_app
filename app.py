@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, redirect, url_for
 from flask import request
 from flask_mysqldb import MySQL
 from utils.auth import Usersignup, Userlogin, check_user_exists
-
+import os
 
 app = Flask(__name__)
 
@@ -212,5 +212,27 @@ def deleteCampus():
     cur.close()
     return redirect(url_for("admin"))
 
+
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    uploaded_file = request.files["file"]
+    if uploaded_file.filename != "":
+        # Save the file to a temporary location
+        file_path = os.path.join(app.config["UPLOAD_FOLDER"], uploaded_file.filename)
+        uploaded_file.save(file_path)
+
+        # Insert the file content into the database
+        conn = mysql.connection
+        cursor = conn.cursor()
+        with open(file_path, "rb") as file:
+            file_content = file.read()
+            cursor.execute("INSERT INTO files (file_content) VALUES (%s)", (file_content,))
+        conn.commit()
+        cursor.close()
+
+        return "File uploaded and saved successfully!"
+    else:
+        return "No file selected."
 if __name__ == '__main__':
     app.run(debug=True)
