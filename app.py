@@ -62,7 +62,7 @@ def studentList(dev):
                 if col == rows[0] and dev:
                     htmlCode += " class = idColumn"
                 htmlCode += ">" + str(col) + '</td>'
-            htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteStudent?mid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
+            htmlCode += '<td style="text-align:end"><a class="noEffect" type = "submit" href = "/api/deleteStudent?mid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
         htmlCode += '</tr>'
 
     cur.close()
@@ -82,7 +82,7 @@ def campusList(arg, dev):
                     htmlCode += " class = idColumn"
                 htmlCode += ">" + str(col) + '</td>'
             if dev:
-                htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
+                htmlCode += '<td style="text-align:end"><a class="noEffect" type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
             htmlCode += '</tr>'
         cur.close()
         return htmlCode
@@ -140,7 +140,7 @@ def addStudent1():
             cur.execute(sql,val)
             mysql.connection.commit()
         else : 
-            return redirect(url_for("apply", error = "you have already apply"))
+            return redirect(url_for("apply", error = "Cannot apply twice."))
             
         userType = session.get("userType")
         match userType:
