@@ -46,11 +46,20 @@ def studentList(dev):
 
     htmlCode = ""
 
-    cur.execute("SELECT studentMail, campusName FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus")
+    if dev:
+        args = 'idMobilityWish, studentMail, campus.campusName'
+    else:
+        args = 'studentMail, campus.campusName'
+
+    cur.execute("SELECT " + args + " FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus ORDER BY idMobilityWish")
     for rows in cur.fetchall():
-        htmlCode += "<tr><td><a href='mailto:" + str(rows[0]) +"'>" + str(rows[0]) +"</a></td><td>" + str(rows[1]) + '</td>'
-        if dev:
-            htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteStudent?cid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
+        if not dev:
+            htmlCode += "<tr><td><a href='mailto:" + str(rows[0]) +"'>" + str(rows[0]) +"</a></td><td>" + str(rows[1]) + '</td>'
+        elif dev:
+            htmlCode += "<tr>"
+            for col in rows:
+                htmlCode += "<td>" + str(col) + '</td>'
+            htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteStudent?mid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
         htmlCode += '</tr>'
 
     cur.close()
@@ -214,6 +223,19 @@ def deleteCampus():
     mysql.connection.commit()
     cur.close()
     return redirect(url_for("admin"))
+
+@app.route('/api/deleteStudent')
+def deleteStudent():
+    cur = mysql.connection.cursor()
+    query = 'DELETE FROM mobilityWish WHERE idMobilityWish=' + str(request.values.get('mid'))
+    print(query)
+    cur.execute(query)
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for("admin"))
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
