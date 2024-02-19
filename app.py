@@ -40,15 +40,27 @@ def hash(data):
     # Getting the hexadecimal representation of the hash and taking the first 20 characters
     return hash_object.hexdigest()[:20]
 
-def studentList():
+def studentList(dev):
     # Create a cursor object
     cur = mysql.connection.cursor()
 
     htmlCode = ""
 
-    cur.execute("SELECT studentMail, campusName FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus")
+    if dev:
+        args = 'idMobilityWish, studentMail, campus.campusName'
+    else:
+        args = 'studentMail, campus.campusName'
+
+    cur.execute("SELECT " + args + " FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus ORDER BY idMobilityWish")
     for rows in cur.fetchall():
-        htmlCode += "<tr><td><a href='mailto:" + str(rows[0]) +"'>" + str(rows[0]) +"</a></td><td>" + str(rows[1]) + '</td></tr>'
+        if not dev:
+            htmlCode += "<tr><td><a href='mailto:" + str(rows[0]) +"'>" + str(rows[0]) +"</a></td><td>" + str(rows[1]) + '</td>'
+        elif dev:
+            htmlCode += "<tr>"
+            for col in rows:
+                htmlCode += "<td>" + str(col) + '</td>'
+            htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteStudent?mid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
+        htmlCode += '</tr>'
 
     cur.close()
     
@@ -64,7 +76,7 @@ def campusList(arg, dev):
             for col in rows:
                 htmlCode += "<td>" + str(col) + '</td>'
             if dev:
-                htmlCode += '<td><a type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" >Remove</a></td>'
+                htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
             htmlCode += '</tr>'
         cur.close()
         return htmlCode
@@ -80,6 +92,15 @@ def addCampus():
     cur.execute(sql,val)
     mysql.connection.commit()
     return render_template("admin.html", campusList = campusList('*', True))
+
+@app.route('/addStudent', methods =['POST'])
+def addStudent():
+    cur = mysql.connection.cursor()
+    sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
+    val = (request.values['idmobilitywish'], request.values['studentMail'], request.values['idCampus'])
+    cur.execute(sql,val)
+    mysql.connection.commit()
+    return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True))
 
 @app.route('/')
 def hello():
@@ -144,7 +165,7 @@ def logout():
 
 @app.route("/list")
 def list():
-    return render_template("list.html", list = studentList())
+    return render_template("list.html", list = studentList(False))
 
 @app.route("/admin")
 def admin():
@@ -152,7 +173,7 @@ def admin():
     if(userType != "admin"):
         return render_template("login.html")
     else:
-        return render_template("admin.html", campusList = campusList('*', True))
+        return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True))
 
 @app.route("/apply")
 def apply(): 
@@ -234,5 +255,18 @@ def upload_file():
         return "File uploaded and saved successfully!"
     else:
         return "No file selected."
+@app.route('/api/deleteStudent')
+def deleteStudent():
+    cur = mysql.connection.cursor()
+    query = 'DELETE FROM mobilityWish WHERE idMobilityWish=' + str(request.values.get('mid'))
+    print(query)
+    cur.execute(query)
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for("admin"))
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 if __name__ == '__main__':
     app.run(debug=True)
