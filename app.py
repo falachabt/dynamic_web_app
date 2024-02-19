@@ -96,8 +96,10 @@ def addCampus():
 @app.route('/addStudent', methods =['POST'])
 def addStudent():
     cur = mysql.connection.cursor()
+    cur.execute("SELECT MAX(idmobilitywish) FROM mobilitywish")
+    studentCount = cur.fetchall()[0][0] + 1
     sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
-    val = (request.values['idmobilitywish'], request.values['studentMail'], request.values['idCampus'])
+    val = (studentCount, request.values['studentMail'], request.values['idCampus'])
     cur.execute(sql,val)
     mysql.connection.commit()
     return redirect(url_for('admin'))
