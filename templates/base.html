@@ -18,20 +18,19 @@
          
 
       <nav>
-          {% if session.get("user") %}
-          <a
-          href="{{ url_for('list') }}"
-          class="{% if active_page == 'list' %}active{% endif %}"
-          >List</a
-          >
-          <a href="{{ url_for('choices') }}" class="">Choices</a>
-          <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} outlined">Admin Portal</a>
-          <a href="{{ url_for('apply') }}" class="special">Apply</a>
-          <a href="{{ url_for('logout') }}" class="critical">Logout</a>
-          {% endif %}
-          {% if not session.get("user") %}
-          <a href="{{ url_for('login') }}" class="special">Login</a>
-          {% endif %}
+        {% if session.get("userType") == 'admin' %}
+        <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} outlined">Admin Portal</a>
+        {% endif %}
+        
+        {% if session.get("user") %}
+        <a href="{{ url_for('choices') }}" class="">Choices</a>
+        <a href="{{ url_for('apply') }}" class="special">Apply</a>
+        <a href="{{ url_for('logout') }}" class="critical">Logout</a>
+        {% endif %}
+
+        {% if not session.get("user") %}
+        <a href="{{ url_for('login') }}" class="special">Login</a>
+        {% endif %}
       </nav>
     </header>
 
