@@ -13,15 +13,14 @@ def Usersignup(mysql, email, password, secret):
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     email VARCHAR(30) UNIQUE NOT NULL,  
                     password VARCHAR(90) NOT NULL,
-                    role VARCHAR(50)
+                    role VARCHAR(50) NOT NULL
                 )
             """)
             
         # issue with password hash
         # hashed_password = generate_password_hash(password)
         role = getRole(secret)
-        print(role)
-        print(password)
+        
         if role is None:
             raise ValueError("Wrong secret")
             

@@ -192,7 +192,6 @@ def login_api():
         password = request.form.get("password")
         [user, errormessage ] = Userlogin(mysql, email, password)
         if user != None:
-            print(user[3])
             session["userType"] = user[3]
             session['user'] = user[0]
             return redirect(url_for("list"))
