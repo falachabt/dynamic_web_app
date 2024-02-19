@@ -246,6 +246,10 @@ hr{
     width: 100%;
     border: 1px solid gray;
 }
+.formTitle{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
 
 /*****************  AUTHENTICATION   **********************/
 

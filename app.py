@@ -40,7 +40,7 @@ def hash(data):
     # Getting the hexadecimal representation of the hash and taking the first 20 characters
     return hash_object.hexdigest()[:20]
 
-def studentList():
+def studentList(dev):
     # Create a cursor object
     cur = mysql.connection.cursor()
 
@@ -48,7 +48,10 @@ def studentList():
 
     cur.execute("SELECT studentMail, campusName FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus")
     for rows in cur.fetchall():
-        htmlCode += "<tr><td><a href='mailto:" + str(rows[0]) +"'>" + str(rows[0]) +"</a></td><td>" + str(rows[1]) + '</td></tr>'
+        htmlCode += "<tr><td><a href='mailto:" + str(rows[0]) +"'>" + str(rows[0]) +"</a></td><td>" + str(rows[1]) + '</td>'
+        if dev:
+            htmlCode += '<td style="text-align:end"><a type = "submit" href = "/api/deleteStudent?cid=' + str(rows[0]) + '" ><img src="static/glyphs/cross.png" class="glyph" alt=""></a></td>'
+        htmlCode += '</tr>'
 
     cur.close()
     
@@ -144,7 +147,7 @@ def logout():
 
 @app.route("/list")
 def list():
-    return render_template("list.html", list = studentList())
+    return render_template("list.html", list = studentList(False))
 
 @app.route("/admin")
 def admin():
@@ -152,7 +155,7 @@ def admin():
     if(userType != "admin"):
         return render_template("login.html")
     else:
-        return render_template("admin.html", campusList = campusList('*', True))
+        return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True))
 
 @app.route("/apply")
 def apply(): 

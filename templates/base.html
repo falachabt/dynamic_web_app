@@ -19,7 +19,7 @@
 
       <nav>
         {% if session.get("user") %}
-        <a href="{{ url_for('choices') }}" class="">Choices</a>
+        <a href="{{ url_for('choices') }}" class="outlined">Choices</a>
         {% endif %}
 
         {% if session.get("userType") == 'admin' %}
