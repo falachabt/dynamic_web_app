@@ -6,7 +6,10 @@
 <div style=" height: calc(100vh-50px); width: calc(100vw-100px) ;  display: flex; justify-content: center; align-items: center;">
 
    <div  class='form auth outlined'>
-      <form action='addstudent1' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
+      <form action='addStudent1' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
+         {% if error %}
+         <span class="error_message" > {{ error }} </span>
+       {% endif %}
       <h3 class='formTitle'>Insert Applicant</h3>
       <div class='vertical formSpaced'>
          

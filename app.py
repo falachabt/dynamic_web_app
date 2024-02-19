@@ -114,17 +114,40 @@ def addStudent():
             
 @app.route('/addStudent1', methods =['POST'])
 def addStudent1():
-    cur = mysql.connection.cursor()
-    sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
-    val = (request.values['idmobilitywish'], request.values['studentMail'], request.values['idCampus'])
-    cur.execute(sql,val)
-    mysql.connection.commit()
-    userType = session.get("userType")
-    match userType:
-        case "amdin":
-            return redirect(url_for('admin'))
-        case "student":
-            return redirect(url_for('choices'))
+    try:
+        cur = mysql.connection.cursor()
+        
+        email = session.get("email")
+        
+        tesql = '''SELECT * FROM mobilitywish WHERE studentmail = %s '''
+        cur.execute(tesql, (email,))
+        exist = None
+        data = cur.fetchall()
+        if(len(data) != 0):
+            exist = data[0][0]  
+        
+        if exist is None:
+            cur.execute("SELECT MAX(idmobilitywish) FROM mobilitywish")
+            sql = "INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (%s, %s, %s)"
+            idMobi = cur.fetchall()[0][0] + 1
+            val = (idMobi, email, request.values['idCampus'])
+            cur.execute(sql,val)
+            mysql.connection.commit()
+        else : 
+            return redirect(url_for("apply", error = "you have already apply"))
+            
+        userType = session.get("userType")
+        match userType:
+            case "amdin":
+                return redirect(url_for('admin'))
+            case "student":
+                return redirect(url_for('choices'))
+    except Exception as e:
+        message = str(e)
+        print(message)
+        # print("Duplicata" in message)
+        flash("")
+        return redirect(url_for("apply"))
             
 
 @app.route('/')
@@ -208,8 +231,9 @@ def apply():
     query = '''SELECT * FROM campus'''
     cur.execute(query)
     campuses = cur.fetchall()
+    error = request.args.get('error')
     
-    return render_template("apply.html", campuses = campuses)
+    return render_template("apply.html", campuses = campuses, error = error)
 
 #api routes 
 @app.route("/adminLogin", methods = ['POST'] )
