@@ -54,7 +54,7 @@ def studentList():
     
     return htmlCode
 
-def campusList(arg):
+def campusList(arg, dev):
     try:
         cur = mysql.connection.cursor()
         htmlCode = ""
@@ -63,6 +63,8 @@ def campusList(arg):
             htmlCode += "<tr>"
             for col in rows:
                 htmlCode += "<td>" + str(col) + '</td>'
+            if dev:
+                htmlCode += '<td><a type = "submit" href = "/api/deleteCampus?cid=' + str(rows[0]) + '" >Remove</a></td>'
             htmlCode += '</tr>'
         cur.close()
         return htmlCode
@@ -77,11 +79,11 @@ def addCampus():
     val = (request.values['campusIndex'], request.values['campusName'])
     cur.execute(sql,val)
     mysql.connection.commit()
-    return render_template("admin.html", campusList = campusList('*'))
+    return render_template("admin.html", campusList = campusList('*', True))
 
 @app.route('/')
 def hello():
-    return render_template('index.html', campusList = campusList('campusName'))
+    return render_template('index.html', campusList = campusList('campusName', False))
 
 @app.route('/choices')
 def choices():
@@ -150,7 +152,7 @@ def admin():
     if(userType != "admin"):
         return render_template("login.html")
     else:
-        return render_template("admin.html", campusList = campusList('*'))
+        return render_template("admin.html", campusList = campusList('*', True))
 
 @app.route("/apply")
 def apply(): 
@@ -200,6 +202,16 @@ def login_api():
             return redirect(url_for("login", error = "Invalid email or password"))
     else:
         return redirect(url_for("login", error = "Invalid request method"))
+
+@app.route('/api/deleteCampus')
+def deleteCampus():
+    cur = mysql.connection.cursor()
+    query = 'DELETE FROM Campus WHERE idCampus=' + str(request.values.get('cid'))
+    print(query)
+    cur.execute(query)
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for("admin"))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -9,21 +9,21 @@
       <table class='stickRight'>
          {{campusList | safe}}
       </table>
-      <form action='addCampus' method='GET' class='outlined'>
-         <h4>Add new Campus</h4>
-         <div class='horizontal'>
-            <label>Campus name</label>
-            <input type='campusName' name='campusName' class='outlined' required>
-         </div>
-         <div class='horizontal'>
-            <label>Campus index</label>
-            <input type='campusIndex' name='campusIndex' class='outlined' required>
-         </div>
-         <hr>
-         <button type='submit' class='outlined'>
-            Submit
-         </button>
-      </form>
+      <div class='form auth outlined'>
+         <form action='addCampus' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
+            <h4>Add new Campus</h4>
+            <div class='horizontal'>
+               <label>Campus name</label>
+               <input type='campusName' name='campusName' class='outlined' required>
+            </div>
+            <div class='horizontal'>
+               <label>Campus index</label>
+               <input type='campusIndex' name='campusIndex' class='outlined' required>
+            </div>
+            <hr>
+            <button type='submit' class='outlined pill' style='width: 100%;margin-top: 10px;'>Insert</a>
+         </form>
+      </div>
    </div>
 </div>
 {% endblock %}
