@@ -3,18 +3,18 @@
 
 {% block content %}
 
-<div class='vertical vspaced'>
-   <h1 class='mainTitle'>Apply for your mobility here.</h1>
-   <p>
-      Students in year O2 and O3 may exclusively apply on this platform. You will require:
-      <br>
-      - You desired destinations ranked by order of preference<br>
-      - A motivation letter covering your 3 preferred destinations<br>
-      - A CV following the international CV guidelines
-   </p>
-   <h3>Available destinations:</h3>
-   <table>
-      {{campusList | safe}}
-   </table>
+<div class='centered home'>
+   <div class='vertical homeTitleContainer'>
+      <h3>Welcome to</h3>
+      <h1 class='mainTitle'>Icam Mobility Portal</h1>
+   </div>
+   <div class='vertical floating blur'>
+      <div class='homeTableContainer vertical'>
+         <h3>Students may apply for the following destinations</h3>
+         <table class='homeTable'>
+            {{campusList | safe}}
+         </table>
+      </div>
+   </div>
 </div>
 {% endblock %}
