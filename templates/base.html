@@ -23,13 +23,13 @@
         {% if session.get("user") %}
         <a href="{{ url_for('choices') }}" class="outlined"> <span class="material-symbols-outlined">
           view_list
-          </span> Choices</a>
+          </span>Choices</a>
         {% endif %}
 
         {% if session.get("userType") == 'admin' %}
-        <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} special"> <span class="material-symbols-outlined">
+        <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %} special"><span class="material-symbols-outlined">
           admin_panel_settings
-          </span>  Admin Portal</a>
+          </span>Admin Portal</a>
         {% endif %}
         
         {% if session.get("user") and session.get("userType") != 'admin' %}
