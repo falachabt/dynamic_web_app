@@ -2,19 +2,8 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-
-<div class='centered home'>
-   <div class='vertical homeTitleContainer'>
-      <h3>Welcome to</h3>
-      <h1 class='mainTitle'>Icam Mobility Portal</h1>
-   </div>
-   <div class='vertical floating blur'>
-      <div class='homeTableContainer vertical'>
-         <h3>Students may apply for the following destinations</h3>
-         <table class='homeTable'>
-            {{campusList | safe}}
-         </table>
-      </div>
-   </div>
-</div>
+<h1>Icam Mobility Portal</h1>
+<table>
+   {{campusList | safe}}
+</table>
 {% endblock %}

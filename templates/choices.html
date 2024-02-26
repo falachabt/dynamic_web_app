@@ -1,39 +1,25 @@
 {% extends 'base.html' %} {% block title %} Students choices {% endblock %} {%
 block content %}
 
-<div class="vertical vspaced">
-  <h1>Current Applications</h1>
-  <div class='horizontal searchBundle' style='width: auto;'>
-    <input type="text" id='search' class='search pill outlined' style='padding: 9px 15px;' placeholder="Look up applicants by email or destination"  defaultValue="{{search}}"   />
-    <a type='submit' class='pill outlined' style='cursor: pointer; width: auto;' id="search_button">
-      <div class="horizontal" style="display: flex; align-items: center; gap: 5px;" >
+<input type="text" id='search' placeholder="Look up applicants by email or destination"  defaultValue="{{search}}"   />
+<a type='submit' id="search_button">
 
-        
-        Search
-        <span class="material-symbols-outlined">
-          search
-        </span>
-      </div>
-      </a>
-  </div>
-  <table class="choices-table">
-    <thead>
-      <tr>
-        <th>Student email</th>
-        <th>Preferred destination</th>
-      </tr>
-    </thead>
-    <tbody>
-      {%for choice in choices %}
-      <tr>
-        <td>{{ choice[0] }}</td>
-        <td>{{ choice[1] }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
+<table >
+  <thead>
+    <tr>
+      <th>Student email</th>
+      <th>Preferred destination</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for choice in choices %}
+    <tr>
+      <td>{{ choice[0] }}</td>
+      <td>{{ choice[1] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {

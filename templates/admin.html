@@ -3,67 +3,43 @@
 
 {% block content %}
 
-<div class='vertical vspaced'>
-   <h1 class='mainTitle'>Administrator Portal</h1>
-   {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div class="error_message">
-      {{ messages[0] }}
-    </div>
-  {% endif %}
+<h1 class='mainTitle'>Administrator Portal</h1>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+   <div class="error_message">
+   {{ messages[0] }}
+   </div>
+{% endif %}
 {% endwith %}
+<table>
+   <tr>
+      <th>ID</th>
+      <th>Campus</th>
+   </tr>
+   {{campusList | safe}}
+</table>
 
-   <h3>Campuses</h3>
-   <div class='horizontal startAlign'>
-      <table class='stickRight'>
-         <tr>
-            <th class='idColumn'>ID</th>
-            <th>Campus</th>
-         </tr>
-         {{campusList | safe}}
-      </table>
-      <div class='form auth outlined'>
-         <form action='addCampus' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
-            <h3 class='formTitle'>Insert Campus</h3>
-            <div class='vertical formSpaced'>
-               <div class='horizontal'>
-                  <label>Campus name</label>
-                  <input type='campusName' name='campusName' class='outlined' required>
-               </div>
-            </div>
-            <hr>
-            <button type='submit' class='outlined pill' style='width: 100%;margin-top: 10px;'>Insert</a>
-         </form>
-      </div>
-   </div>
+<form action='addCampus' method='POST'>
+   <h3>Insert Campus</h3>
+         <label>Campus name</label>
+         <input type='campusName' name='campusName' required>
+   <button type='submit'>Insert</a>
+</form>
 
-   <h3>Applicants</h3>
-   <div class='horizontal startAlign'>
-      <table class='stickRight'>
-         <tr>
-            <th class='idColumn'>ID</th>
-            <th>email</th>
-            <th>Preferred destination</th>
-         </tr>
-         {{studentList | safe}}
-      </table>
-      <div class='form auth outlined'>
-         <form action='addStudent' style='display: flex; flex-direction: column; align-items: center;' method='POST'>
-            <h3 class='formTitle'>Insert Applicant</h3>
-            <div class='vertical formSpaced'>
-               <div class='horizontal'>
-                  <label htmlFor="studentMail">Student email</label>
-                  <input id="studentMail" type='studentMail' name='studentMail' class='outlined' required>
-               </div>
-               <div class='horizontal'>
-                  <label>Campus index</label>
-                  <input type='idCampus' name='idCampus' class='outlined' required>
-               </div>
-            </div>
-            <hr>
-            <button type='submit' class='outlined pill' style='width: 100%;margin-top: 10px;'>Insert</a>
-         </form>
-      </div>
-   </div>
-</div>
+<table>
+   <tr>
+      <th>ID</th>
+      <th>email</th>
+      <th>Preferred destination</th>
+   </tr>
+   {{studentList | safe}}
+</table>
+
+<form action='addStudent' method='POST'>
+   <label htmlFor="studentMail">Student email</label>
+   <input id="studentMail" type='studentMail' name='studentMail' required>
+   <label>Campus index</label>
+   <input type='idCampus' name='idCampus' class='outlined'required>
+   <button type='submit'>Insert</a>
+</form>
 {% endblock %}

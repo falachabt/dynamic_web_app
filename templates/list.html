@@ -2,17 +2,11 @@
 {% block title %} Applications {% endblock %}
 
 {% block content %}
-<div class='vertical vspaced'>
-   <h1 class='contentTitle'>Consult applications here</h1>
-   <div class='vertical onTop'>
-      <h3>Please contact support@icam.fr in case of error or missing application.</h3>
-   <table>
-      <tr>
-         <th>Email</th>
-         <th>Preferred destination</th>
-      </tr>
-      {{list | safe}}
-   </table>
-   </div>
-</div>
+<table>
+   <tr>
+      <th>Email</th>
+      <th>Preferred destination</th>
+   </tr>
+   {{list | safe}}
+</table>
 {% endblock %}
