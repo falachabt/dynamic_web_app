@@ -1,16 +1,36 @@
 {% extends 'base.html' %} {% block title %} Signup {% endblock %} {% block
     content %}
 
-{% if error %}
-  <span class="error_message" > {{ error }} </span>
-{% endif %}
-<form action="/api/signup" method="post">
-  <label for="email">Email</label>
-  <input type="text" id="email" name="email" placeholder="example@icam.fr" required/>
-  <label for="secret">Invite</label>
-  <input type="text" id="secret" name="secret" placeholder="2027" required />
-</form>
+<div class='centered vertical'>
+  <h1>Sign up to the portal</h1>
+  <div class='centered vertical block auth'>
+    {% if error %}
+      <span class="error_message" > {{ error }} </span>
+    {% endif %}
+    <form action="/api/signup" method="post" class='vertical vspaced'>
+  
+      <div class='horizontal'>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="example@icam.fr" required />
+      </div>
+  
+      <div class='horizontal'>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="ex@mp1e" required/>
+      </div>
 
-<a href="{{url_for('login')}}"> Login </a>
+      <div class='horizontal'>
+        <label for="secret">Invite Code</label>
+        <input type="text" id="secret" name="secret" placeholder="####" required />
+      </div>
+  
+      <button type="submit" style='width: auto;'>Sign up</button>
+  
+      <hr>
+  
+      <a href="{{url_for('login')}}"> Log in to existing account </a>
+    </form>
+  </div>
+</div>
 
 {% endblock %}

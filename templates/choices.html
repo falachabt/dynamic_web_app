@@ -1,25 +1,29 @@
 {% extends 'base.html' %} {% block title %} Students choices {% endblock %} {%
 block content %}
+<div class='vertical vspaced'>
 
-<input type="text" id='search' placeholder="Look up applicants by email or destination"  defaultValue="{{search}}"   />
-<a type='submit' id="search_button">
+  <h1>
+    Browse Candidates
+  </h1>
 
-<table >
-  <thead>
-    <tr>
-      <th>Student email</th>
-      <th>Preferred destination</th>
-    </tr>
-  </thead>
-  <tbody>
-    {%for choice in choices %}
-    <tr>
-      <td>{{ choice[0] }}</td>
-      <td>{{ choice[1] }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <div class='horizontal hspaced'>
+    <input type="text" id='search' class='hfill' placeholder="Look up candidates by email or destination"  defaultValue="{{search}}"/>
+    <a type='submit' id="search_button">Search</a>
+  </div>
+
+  <table>
+      <tr>
+        <th>Student email</th>
+        <th>Preferred destination</th>
+      </tr>
+      {%for choice in choices %}
+      <tr>
+        <td>{{ choice[0] }}</td>
+        <td>{{ choice[1] }}</td>
+      </tr>
+      {% endfor %}
+  </table>
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {

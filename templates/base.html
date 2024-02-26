@@ -11,41 +11,42 @@
   </head>
 
   <body>
-    <a href="/">
-      <img src="{{ url_for('static', filename='images/logotype-seul-couleur-RVB.png') }}" class="logo" alt="icam logo" srcset="">
-    </a>
-
-    <nav>
-      {% if session.get("user") %}
-      <a href="{{ url_for('choices') }}"> <span class="material-symbols-outlined">
-        view_list
-        </span>Choices</a>
-      {% endif %}
-
-      {% if session.get("userType") == 'admin' %}
-      <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %}"><span class="material-symbols-outlined">
-        admin_panel_settings
-        </span>Admin Portal</a>
-      {% endif %}
-      
-      {% if session.get("user") and session.get("userType") != 'admin' %}
-      <a href="{{ url_for('apply') }}"> <span class="material-symbols-outlined">
-        edit
-        </span> Apply</a>
-      {% endif %}
-
-      {% if session.get("user") %}
-      <a href="{{ url_for('logout') }}"> <span class="material-symbols-outlined">
-        logout
-        </span> Log {{ session.get("email") }} out</a>
-      {% endif %}
-
-      {% if not session.get("user") %}
-      <a href="{{ url_for('login') }}"> <span class="material-symbols-outlined">
-        login
-        </span> Login</a>
-      {% endif %}
-    </nav>
-    <div  class="content">{% block content %} {% endblock %}</div>
+    <header>
+      <a href="/" style='background-color: transparent;' class='noEffect'>
+        <img src="{{ url_for('static', filename='images/logotype-seul-couleur-RVB.png') }}" class="logo" alt="icam logo" srcset="">
+      </a>
+      <nav>
+        {% if session.get("user") %}
+        <a href="{{ url_for('choices') }}"> <span class="material-symbols-outlined">
+          view_list
+          </span>Choices</a>
+        {% endif %}
+  
+        {% if session.get("userType") == 'admin' %}
+        <a href="{{ url_for('admin') }}" class="{% if active_page == 'admin' %}active{% endif %}"><span class="material-symbols-outlined">
+          admin_panel_settings
+          </span>Admin Portal</a>
+        {% endif %}
+        
+        {% if session.get("user") and session.get("userType") != 'admin' %}
+        <a href="{{ url_for('apply') }}"> <span class="material-symbols-outlined">
+          edit
+          </span> Apply</a>
+        {% endif %}
+  
+        {% if session.get("user") %}
+        <a href="{{ url_for('logout') }}"> <span class="material-symbols-outlined">
+          logout
+          </span> Log {{ session.get("email") }} out</a>
+        {% endif %}
+  
+        {% if not session.get("user") %}
+        <a href="{{ url_for('login') }}"> <span class="material-symbols-outlined">
+          login
+          </span> Login</a>
+        {% endif %}
+      </nav>
+    </header>
+    <div  class="content vertical">{% block content %} {% endblock %}</div>
   </body>
 </html>

@@ -192,11 +192,16 @@ def list():
 
 @app.route("/admin")
 def admin():
+    cur = mysql.connection.cursor()
+    query = '''SELECT * FROM campus'''
+    cur.execute(query)
+    campuses = cur.fetchall()
+    error = request.args.get('error')
     userType = session.get("userType")
     if(userType != "admin"):
         return render_template("login.html")
     else:
-        return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True))
+        return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True), campuses = campuses, error = error)
 
 @app.route("/apply")
 def apply(): 

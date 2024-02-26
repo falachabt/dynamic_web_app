@@ -1,23 +1,262 @@
 @font-face {
-    font-family: 'Montserrat';
-    src: url(/static/Montserrat/Montserrat-VariableFont_wght.ttf);
+    font-family: 'Product Sans';
+    src: url(/static/Fonts/ProductSans/ProductSans-Regular.ttf);
     font-weight: 400;
 }
 
 @font-face {
-    font-family: 'Montserrat Bold';
-    src: url(/static/Montserrat/Montserrat-VariableFont_wght.ttf);
+    font-family: 'Product Sans Bold';
+    src: url(/static/Fonts/ProductSans/ProductSans-Bold.ttf);
     font-weight: 700;
 }
 
 @font-face {
-    font-family: 'Montserrat Black';
-    src: url(/static/Montserrat/Montserrat-VariableFont_wght.ttf);
+    font-family: 'Product Sans Black';
+    src: url(/static/Fonts/ProductSans/ProductSans-Black.ttf);
     font-weight: 900;
+}
+
+/************* TITLES ****************/
+h1{
+    font-family: 'Product Sans Black';
+}
+
+h2, h3, h4{
+    font-family: 'Product Sans Bold';
 }
 
 /************* IMAGES ****************/
 
 img.logo{
     height: 40px;
+}
+
+.material-symbols-outlined{
+    margin-right: 5px;
+}
+
+.glyph{
+    height: 1em;
+}
+
+/************* BODY ****************/
+
+body{
+    margin: 0;
+    font-family: 'Product Sans';
+    overflow: hidden;
+}
+
+/************* NAV BAR ****************/
+
+header{
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.617);
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px gray;
+    z-index: 1000;
+    position: fixed;
+    width: calc(100vw - 40px);
+    backdrop-filter: blur(10px);
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav > *{
+    margin-left: 15px;
+}
+
+nav > a{
+    background-color: rgb(240, 240, 240);
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1em;
+    color: black;
+}
+
+/************* GENERAL ****************/
+
+a{
+    text-decoration: none;
+}
+
+div.content{
+    justify-content: start;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    padding: 40px;
+    padding-top: calc(40px + 90px);
+    overflow-y: scroll;
+}
+
+.centered{
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+}
+
+.block{
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.150);
+    border: 1px solid rgba(0, 0, 0, 0.200);
+}
+
+hr{
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.200);
+}
+
+.noEffect{
+    background-color: transparent;
+}
+
+.noEffect:hover{
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/************* LINKS & BUTTONS ****************/
+
+button, a, input, select{
+    font-family: 'Product Sans';
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1em;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover, a:hover, select:hover{
+    background-color: #4285f4;
+    color: white;
+    box-shadow: 0 5px 10px #4285f4;
+}
+
+input{
+    cursor: text;
+    text-align: left;
+    color: gray;
+    border: 1px solid transparent;
+}
+
+input:hover{
+    border: 1px solid rgba(0, 0, 0, 0.200);
+    background-color: white;
+}
+
+/************* FLEX CONTAINERS ****************/
+
+.vertical{
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.vspaced > *{
+    margin-top: 20px;
+}
+.vspaced > *:first-child{
+    margin-top: 0;
+}
+
+.hspaced > *{
+    margin-left: 20px;
+}
+.hspaced > *:first-child{
+    margin-left: 0;
+}
+
+.vfill{
+    height: 100%;
+}
+
+.hfill{
+    width: 100%;
+}
+
+.jbetween{
+    justify-content: space-between;
+}
+
+/************* FORMS ****************/
+
+form > .horizontal{
+    justify-content: space-between;
+}
+
+form{
+    width: 350px;
+}
+
+form > h3{
+    margin-bottom: 0;
+}
+
+/************* AUTHENTICATION ****************/
+
+.auth{
+    padding: 40px;
+}
+
+/************* TABLES ****************/
+
+table{
+    width: 50%;
+}
+
+th{
+    text-align: left;
+    font-family: 'Product Sans Bold';
+    font-size: 1.2em;
+}
+
+td{
+    border-top: 1px solid rgba(0, 0, 0, 0.200);
+}
+
+tr{
+    height: 2em;
+}
+
+.idColumn{
+    width: 2em;
+    font-family: monospace;
+    color: gray;
+}
+
+/************* ERROR HANDLING ****************/
+
+.error_message{
+    background-color: red;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    position: fixed;
+    top: 120px;
+    z-index: 2000;
+    box-shadow: 0 5px 10px red;
 }

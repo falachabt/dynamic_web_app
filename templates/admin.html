@@ -3,43 +3,68 @@
 
 {% block content %}
 
-<h1 class='mainTitle'>Administrator Portal</h1>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-   <div class="error_message">
-   {{ messages[0] }}
+<div class='vertical vspaced'>
+
+   <h1 class='mainTitle'>Administrator Portal</h1>
+
+   {% with messages = get_flashed_messages() %}
+   {% if messages %}
+      <div class="error_message">
+      {{ messages[0] }}
+      </div>
+   {% endif %}
+   {% endwith %}
+
+   <div class='horizontal jbetween'>
+      <table>
+         <tr>
+            <th>ID</th>
+            <th>Campus</th>
+         </tr>
+         {{campusList | safe}}
+      </table>
+   
+      <div class='vertical block'>
+         <form action='addCampus' class='vertical vspaced' method='POST'>
+            <h3>Insert Campus</h3>
+            <div class='horizontal'>
+               <label>Campus name</label>
+               <input type='campusName' name='campusName' required>
+            </div>
+            <button type='submit'>Insert</button>
+         </form>
+      </div>
    </div>
-{% endif %}
-{% endwith %}
-<table>
-   <tr>
-      <th>ID</th>
-      <th>Campus</th>
-   </tr>
-   {{campusList | safe}}
-</table>
 
-<form action='addCampus' method='POST'>
-   <h3>Insert Campus</h3>
-         <label>Campus name</label>
-         <input type='campusName' name='campusName' required>
-   <button type='submit'>Insert</a>
-</form>
+   <div class='horizontal jbetween'>
+      <table>
+         <tr>
+            <th>ID</th>
+            <th>email</th>
+            <th>Preferred destination</th>
+         </tr>
+         {{studentList | safe}}
+      </table>
+   
+      <div class='vertical block'>
+         <form action='addStudent' class='vertical vspaced' method='POST'>
+            <h3>Insert Candidate</h3>
+            <div class='horizontal'>
+               <label htmlFor="studentMail">Student email</label>
+               <input id="studentMail" type='studentMail' name='studentMail' required>
+            </div>
+            <div class='horizontal'>
+               <label style='margin-right: 10px;'>Select campus</label>
+               <select type='idCampus' name='idCampus' required>
+               {% for campus in campuses %}
+                  <option value="{{campus[0]}}">{{campus[1]}}</option>
+               {% endfor %}
+               </select>
+            </div>
+            <button type='submit'>Insert</button>
+         </form>
+      </div>
+   </div>
+</div>
 
-<table>
-   <tr>
-      <th>ID</th>
-      <th>email</th>
-      <th>Preferred destination</th>
-   </tr>
-   {{studentList | safe}}
-</table>
-
-<form action='addStudent' method='POST'>
-   <label htmlFor="studentMail">Student email</label>
-   <input id="studentMail" type='studentMail' name='studentMail' required>
-   <label>Campus index</label>
-   <input type='idCampus' name='idCampus' class='outlined'required>
-   <button type='submit'>Insert</a>
-</form>
 {% endblock %}
