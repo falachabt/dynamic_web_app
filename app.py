@@ -69,6 +69,9 @@ def studentList(dev):
     
     return htmlCode
 
+
+
+
 def campusList(arg, dev):
     try:
         cur = mysql.connection.cursor()
