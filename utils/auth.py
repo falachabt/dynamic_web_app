@@ -1,5 +1,6 @@
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
+import hashlib
 
 def Usersignup(mysql, email, password, secret):
     try:
@@ -24,7 +25,7 @@ def Usersignup(mysql, email, password, secret):
         if role is None:
             raise ValueError("Wrong secret")
             
-        cur.execute("INSERT INTO users (email, password, role) VALUES (%s, %s, %s)", (email, password, role))
+        cur.execute("INSERT INTO users (email, password, role) VALUES (%s, %s, %s)", (email, hash(password), role))
         mysql.connection.commit()
         cur.close()
         return True, None
@@ -36,7 +37,7 @@ def Usersignup(mysql, email, password, secret):
 def Userlogin(mysql : MySQL, email : str, password: str):
     try:
         cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM users WHERE email = %s AND password = %s " , (email,password))
+        cur.execute("SELECT * FROM users WHERE email = %s AND password = %s " , (email,hash(password)))
         user = cur.fetchone()
         cur.close()
         
@@ -69,3 +70,9 @@ def getRole(secret):
             return "student"
         case "other":
             return None
+
+def hash(data):
+    # Using SHA-1 hashing algorithm
+    hash_object = hashlib.sha1(data.encode())
+    # Getting the hexadecimal representation of the hash and taking the first 20 characters
+    return hash_object.hexdigest()[:20]

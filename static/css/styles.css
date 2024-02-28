@@ -21,6 +21,10 @@ h1{
     font-family: 'Product Sans Black';
 }
 
+#mainTitle{
+    font-size: 3em;
+}
+
 h2, h3, h4{
     font-family: 'Product Sans Bold';
 }
@@ -130,6 +134,12 @@ hr{
     box-shadow: none;
 }
 
+#greetings > *{
+    line-height: 0;
+    color: white;
+    text-shadow: 0 5px 10px rgba(0, 0, 0, 0.200);
+}
+
 /************* LINKS & BUTTONS ****************/
 
 button, a, input, select{
@@ -200,6 +210,13 @@ input:hover{
 
 .jbetween{
     justify-content: space-between;
+}
+
+.dreamy{
+    background-image: url('/static/images/plane.jpg');
+    background-position: initial;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /************* FORMS ****************/

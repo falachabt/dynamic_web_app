@@ -34,12 +34,6 @@ def database():
 
     return rows
 
-def hash(data):
-    # Using SHA-1 hashing algorithm
-    hash_object = hashlib.sha1(data.encode())
-    # Getting the hexadecimal representation of the hash and taking the first 20 characters
-    return hash_object.hexdigest()[:20]
-
 def studentList(dev):
     # Create a cursor object
     cur = mysql.connection.cursor()

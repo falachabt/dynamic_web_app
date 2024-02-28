@@ -2,8 +2,17 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<h1>Icam Mobility Portal</h1>
-<table>
-   {{campusList | safe}}
-</table>
+<div  class='content vertical centered dreamy'>
+   <div class='vertical vspaced' style='width: fit-content; align-self: center;'>
+      <div class='vertical' id='greetings'>
+         <h2>Welcome to</h2>
+         <h1 id='mainTitle'>Icam Mobility Portal</h1>
+      </div>
+      <div class='block auth'>
+         <table style='width: 100%;'>
+            {{campusList | safe}}
+         </table>
+      </div>
+   </div>
+</div>
 {% endblock %}
