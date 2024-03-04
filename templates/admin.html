@@ -7,6 +7,16 @@
 
    <h1 class='mainTitle'>Administrator Portal</h1>
 
+   <div class='horizontal' style='width: 300px; justify-content: start;'>
+      <form action='generateStudents' method='post'>
+         <button type='submit'>Nuclear button</button>
+      </form>
+   
+      <form action='cleanTable' method='post'>
+         <button type='submit'>Nuclear cleaner</button>
+      </form>
+   </div>
+
    {% with messages = get_flashed_messages() %}
    {% if messages %}
       <div class="error_message">
@@ -36,7 +46,7 @@
       </div>
    </div>
 
-   <div class='horizontal jbetween'>
+   <div class='horizontal jbetween' style='align-items: start;'>
       <table>
          <tr>
             <th>ID</th>

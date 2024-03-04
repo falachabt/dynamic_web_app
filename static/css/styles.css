@@ -64,6 +64,7 @@ header{
     position: fixed;
     width: calc(100vw - 40px);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 nav{

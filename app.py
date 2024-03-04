@@ -2,7 +2,10 @@ from flask import Flask, render_template, session, redirect, url_for, flash
 from flask import request
 from flask_mysqldb import MySQL
 from utils.auth import Usersignup, Userlogin, check_user_exists
+from random import randint
 import os
+from string import digits
+import re
 
 app = Flask(__name__)
 
@@ -16,7 +19,7 @@ mysql = MySQL(app)
 app.secret_key = '12345678'
  
 admin_code = "board_123"
-student_code = "2027" 
+student_code = "2027"
 
 def database():
     # Create a cursor object
@@ -34,7 +37,7 @@ def database():
 
     return rows
 
-def studentList(dev):
+def studentList(dev,filter):
     # Create a cursor object
     cur = mysql.connection.cursor()
 
@@ -45,7 +48,10 @@ def studentList(dev):
     else:
         args = 'studentMail, campus.campusName'
 
-    cur.execute("SELECT " + args + " FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus ORDER BY idMobilityWish")
+    if dev and filter != '':
+        cur.execute("SELECT " + args + " FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus WHERE studentMail = " + filter + " OR campus.campusName = " + filter + " ORDER BY idMobilityWish")
+    else:
+        cur.execute("SELECT " + args + " FROM mobilitywish JOIN campus ON mobilitywish.Campus_idCampus = campus.idCampus ORDER BY idMobilityWish")
     for rows in cur.fetchall():
         if not dev:
             htmlCode += "<tr><td><a href='mailto:" + str(rows[0]) +"'>" + str(rows[0]) +"</a></td><td>" + str(rows[1]) + '</td>'
@@ -182,7 +188,7 @@ def redirectPage():
 
 @app.route("/list")
 def list():
-    return render_template("list.html", list = studentList(False))
+    return render_template("list.html", list = studentList(False,''))
 
 @app.route("/admin")
 def admin():
@@ -195,7 +201,7 @@ def admin():
     if(userType != "admin"):
         return render_template("login.html")
     else:
-        return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True), campuses = campuses, error = error)
+        return render_template("admin.html", campusList = campusList('*', True), studentList = studentList(True, ''), campuses = campuses, error = error)
 
 @app.route("/apply")
 def apply(): 
@@ -291,6 +297,7 @@ def upload_file():
         return "File uploaded and saved successfully!"
     else:
         return "No file selected."
+    
 @app.route('/api/deleteStudent')
 def deleteStudent():
     cur = mysql.connection.cursor()
@@ -299,6 +306,44 @@ def deleteStudent():
     mysql.connection.commit()
     cur.close()
     return redirect(url_for("admin"))
+
+@app.route('/generateStudents', methods = ['POST'])
+def generateStudents():
+    emails = open("emails.txt")
+    for email in emails:
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT MAX(idmobilitywish) FROM mobilitywish")
+            studentCount = cur.fetchall()[0][0] + 1
+            cur.execute("SELECT MAX(idCampus) FROM Campus")
+            campusCount = cur.fetchall()[0][0] + 1
+            destination = randint(1,campusCount)
+            query = 'INSERT INTO mobilitywish(idmobilitywish, studentmail, Campus_idCampus) VALUES (' + str(studentCount) + ',"' + iSaidNoNumbers(email.replace('\n','').replace('-','.').replace('_','.')) + '", ' + str(destination) + ')'
+            print(query)
+            cur.execute(query)
+            mysql.connection.commit()
+            cur.close()
+        except:
+            nothing = True
+    emails.close
+    return redirect(url_for('admin'))
+
+@app.route('/cleanTable', methods = ['POST'])
+def cleanTable():
+    try:
+        cur = mysql.connection.cursor()
+        query = 'DELETE FROM MobilityWish WHERE MobilityWish.idMobilityWish > 10;'
+        print(query)
+        cur.execute(query)
+        mysql.connection.commit()
+        cur.close()
+    except:
+        nothing = True
+    return redirect(url_for('admin'))
+
+def iSaidNoNumbers(text):
+    res = re.sub(r'\d+', '', text)
+    return res
 
 if __name__ == '__main__':
     app.run(debug=True)
